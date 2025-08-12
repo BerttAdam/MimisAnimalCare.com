@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mimi’s Animal Care • Walking, Pet Sitting, Potty Breaks & Adventure Days</title>
+<meta name="description" content="Friendly, reliable pet care by Mimi: dog walking, potty breaks, in-home sitting, 3-hour adventures, and cat/small animal care. Serving Genesee, Lapeer, Saginaw — travel available." />
+
+<style>
+/* ===== Reset-ish & theme ===== */
+:root{
+  --purple:#7c3aed;        /* primary */
+  --purple-dark:#5b21b6;   /* hover/dark */
+  --lav:#f5f3ff;           /* light bg */
+  --ink:#0f172a;           /* headings */
+  --muted:#475569;         /* body text */
+  --ring:#e6e6f0;          /* borders */
+  --radius:16px;
+  --container:1100px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  color:var(--ink); background:#fff; line-height:1.55;
+}
+h1,h2,h3{margin:0 0 .35rem 0; font-weight:800; color:var(--ink)}
+p{margin:.25rem 0 1rem}
+a{color:var(--purple); text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%; height:auto; display:block}
+
+/* ===== Layout helpers ===== */
+.section{padding:3rem 1rem}
+.container{max-width:var(--container); margin:0 auto}
+.alt{background:var(--lav)}
+.h1{font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900}
+.h2{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:900; color:var(--purple)}
+.lead{color:var(--muted); font-size:1.05rem}
+.small{color:var(--muted); font-size:.95rem}
+.muted{color:var(--muted)}
+.fineprint{font-size:.92rem; color:var(--muted)}
+.accent{color:var(--purple)}
+
+/* ===== Topbar & header ===== */
+.topbar{background:#111827; color:#fff; font-size:.9rem}
+.topbar .container{display:flex; gap:1rem; justify-content:space-between; padding:.6rem 1rem}
+.link-underline{text-decoration:underline; text-underline-offset:2px}
+
+header{position:sticky; top:0; z-index:50; backdrop-filter:blur(6px); background:#ffffffd9; border-bottom:1px solid #e5e7eb}
+.nav{display:none; gap:1rem; font-size:.95rem}
+.brand{display:flex; align-items:center; gap:.6rem; color:inherit; text-decoration:none}
+.icon-btn{border:1px solid #cbd5e1; padding:.45rem .6rem; border-radius:12px; background:#fff; display:inline-flex; align-items:center; gap:.25rem}
+
+@media (min-width:768px){ .nav{display:flex} }
+
+/* Mobile menu */
+.mobile{display:none; padding:0 1rem 1rem}
+.mobile a{display:block; padding:.65rem .75rem; border-radius:10px}
+.mobile a:hover{background:#f3e8ff}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,#faf5ff, #ffffff 35%, #fdf4ff)}
+.hero-grid{display:grid; gap:1.25rem}
+@media (min-width:900px){ .hero-grid{grid-template-columns: 1fr 1fr; align-items:center} }
+.hero-img{width:100%; height:220px; object-fit:cover; border-radius:24px; box-shadow:0 18px 40px rgba(0,0,0,.08); border:1px solid #e2e8f0}
+@media(min-width:768px){ .hero-img{height:320px} }
+
+/* ===== Buttons ===== */
+.btn{display:inline-flex; align-items:center; justify-content:center; padding:.9rem 1.1rem; border-radius:12px; font-weight:700; border:0; cursor:pointer}
+.btn-primary{background:var(--purple); color:#fff}
+.btn-primary:hover{background:var(--purple-dark)}
+.btn-secondary{background:#fff; color:var(--purple); border:2px solid var(--purple)}
+.btn-secondary:hover{background:#ede9fe}
+
+/* ===== Cards / Services / Pricing ===== */
+.grid-cards{display:grid; grid-template-columns:1fr; gap:14px}
+@media(min-width:640px){ .grid-cards{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:960px){ .grid-cards{grid-template-columns:repeat(3,1fr)} }
+
+.card, .service-card{
+  background:#fff; border:1px solid var(--ring); border-radius:var(--radius); padding:18px;
+}
+.service-card:hover{background:var(--lav)}
+.badge{display:inline-block; font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; background:#ede9fe; color:var(--purple); padding:.25rem .5rem; border-radius:999px; margin-bottom:.5rem}
+.featured{outline:2px solid #e9d5ff; box-shadow:0 12px 28px rgba(92,43,180,.10)}
+.sub{color:var(--muted); margin:.25rem 0 .5rem}
+.price{font-size:2rem; font-weight:900; color:var(--ink)}
+ul.bullets{margin:.75rem 0 0; padding-left:1.1rem; color:var(--muted)}
+ul.bullets li{margin:.25rem 0}
+.tiny{font-size:.85rem; color:var(--muted); margin-top:.2rem}
+
+.pricing{background:var(--lav)}
+
+/* ===== FAQ ===== */
+.faq{border:1px solid var(--ring); border-radius:12px; padding:14px; background:#fff}
+.faq summary{font-weight:700; cursor:pointer}
+.faq p{color:var(--muted); margin-top:.45rem}
+
+/* ===== Form ===== */
+.form{background:#fff; border:1px solid var(--ring); border-radius:var(--radius); padding:18px; box-shadow:0 12px 32px rgba(17,24,39,.06)}
+.field{display:flex; flex-direction:column; gap:.4rem}
+.field span{font-size:.9rem; color:#334155}
+.field input,.field select,.field textarea{
+  width:100%; border:1px solid #cbd5e1; border-radius:12px; padding:.8rem .9rem; outline:none; font:inherit;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#c4b5fd; box-shadow:0 0 0 3px #ede9fe}
+
+/* ===== GALLERY (3-at-a-time carousel) ===== */
+.gallery{background:#fff}
+.carousel{position:relative}
+.carousel-viewport{overflow:hidden}
+.carousel-track{
+  display:flex;
+  transition:transform .45s ease;
+  will-change:transform;
+}
+.carousel-item{
+  flex:0 0 33.3333%; /* 3 per view */
+}
+.carousel-card{
+  padding:.5rem;
+}
+.carousel-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid var(--ring);
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+@media(min-width:900px){
+  .carousel-card img{height:220px}
+}
+.carousel-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:#fff; border:1px solid #d1d5db; width:44px; height:44px; border-radius:999px;
+  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+.carousel-btn:hover{background:#f8fafc}
+.carousel-btn svg{width:22px;height:22px;stroke:#374151}
+.carousel-btn.prev{left:-6px}
+.carousel-btn.next{right:-6px}
+
+/* ===== Footer ===== */
+footer{background:var(--purple); color:#fff; padding:2rem 1rem; margin-top:2rem}
+footer a{color:#fff}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+
+<body>
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container">
+      <p>Friendly • Insured • Free meet &amp; greet</p>
+      <a class="link-underline" href="tel:+18104497159">Call/Text: (810) 449-7159</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 0;">
+      <a class="brand" href="#">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" style="color:var(--purple)"><path d="M10 6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m9 0a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0M14 4a2 2 0 1 1-4 0a2 2 0 0 1 4 0M7.5 12.5c0-2.2 2.6-4 5.5-4s5.5 1.8 5.5 4c0 1.9-2 4.5-5.5 7c-3.5-2.5-5.5-5.1-5.5-7Z"/></svg>
+        <strong>Mimi’s Animal Care</strong>
+      </a>
+
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button id="menuBtn" class="icon-btn" aria-label="Open menu" aria-expanded="false">
+        <svg id="hamb" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" class="hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="mobile">
+      <div class="container">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-primary" style="width:100%;margin-top:.4rem">Book Meet &amp; Greet</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="section hero">
+    <div class="container hero-grid">
+      <div>
+        <img class="hero-img" src="Pictures/mimi.jpg" alt="Happy dog on a walk">
+      </div>
+      <div>
+        <h1 class="h1">Bubbly, loving <span class="accent">pet care</span> that feels like family</h1>
+        <p class="lead">Walks, potty breaks, in-home sitting, 3-hour adventures, and more—tailored to your pet.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
+          <a class="btn btn-primary" href="#pricing">See Pricing</a>
+          <a class="btn btn-secondary" href="#contact">Request Availability</a>
+        </div>
+        <p class="small" style="margin-top:.8rem"><strong>Serving:</strong> Genesee • Lapeer • Saginaw — and farther with advance notice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="h2">Services</h2>
+      <p class="muted">Flexible, friendly care for every personality and routine.</p>
+
+      <div class="grid-cards">
+        <article class="service-card"><h3>Dog Walking</h3><p>30/45/60-minute walks with photo updates (leash manners encouraged!).</p></article>
+        <article class="service-card"><h3>In-Home Pet Sitting</h3><p>Keep routines cozy at home — overnights available.</p></article>
+        <article class="service-card"><h3>Potty Breaks</h3><p>Quick relief visits with water refresh, notes, and a cuddle.</p></article>
+        <article class="service-card"><h3>3-Hour Adventure Day</h3><p>Park time, enrichment games, and a scenic stroll — pure joy!</p></article>
+        <article class="service-card"><h3>Cats &amp; Small Animals</h3><p>Play, litter refresh, meds, and gentle company for shy friends.</p></article>
+        <article class="service-card"><h3>Custom Care — Just Ask!</h3><p>Pets with special medical needs welcome. If it’s not listed, ask!</p></article>
+      </div>
+
+      <p class="fineprint" style="margin-top:.8rem">Travel to other locations available after a price is discussed.</p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section pricing">
+    <div class="container">
+      <h2 class="h2">Pricing</h2>
+      <p class="muted">Simple, transparent rates. Holiday &amp; weekend adjustments shown below.</p>
+
+      <div class="grid-cards">
+        <article class="card">
+          <h3>Potty Break</h3>
+          <p class="sub">15 minutes</p>
+          <p class="price">$15</p>
+          <ul class="bullets"><li>Quick relief &amp; water</li><li>Photo update</li></ul>
+        </article>
+
+        <article class="card featured">
+          <p class="badge">Most booked</p>
+          <h3>Walk / Drop-in</h3>
+          <p class="sub">30 minutes</p>
+          <p class="price">$20</p>
+          <ul class="bullets"><li>Feeding/meds on request</li><li>Notes &amp; pics</li></ul>
+        </article>
+
+        <article class="card">
+          <h3>Walk / Drop-in</h3>
+          <p class="sub">60 minutes</p>
+          <p class="price">$30</p>
+          <ul class="bullets"><li>Enrichment &amp; playtime</li><li>Great for high-energy pets</li></ul>
+        </article>
+
+        <article class="card">
+          <h3>Cats &amp; Small Animals</h3>
+          <p class="sub">30 minutes</p>
+          <p class="price">$20</p>
+          <ul class="bullets"><li>Litter/habitat refresh</li><li>Gentle company</li></ul>
+        </article>
+
+        <article class="card">
+          <h3>Overnight Sitting</h3>
+          <p class="sub">In-home • 10–12 hrs</p>
+          <p class="price">$40</p>
+          <p class="tiny">Fri–Sun $85 • Holidays $95</p>
+          <ul class="bullets"><li>Evening &amp; morning walk</li><li>Regular updates</li></ul>
+        </article>
+
+        <article class="card">
+          <h3>Adventure Outing</h3>
+          <p class="sub">3 hours</p>
+          <p class="price">from $60</p>
+          <ul class="bullets"><li>Park + enrichment games</li><li>Post-adventure recap</li></ul>
+        </article>
+      </div>
+
+      <div class="fineprint">
+        <p><strong>Extras:</strong> +$5 per additional pet (walks: +$5 per additional dog). <strong>Travel:</strong> first 30 miles included; +$0.50/mi after that. Over 50 miles? <a href="#contact">Ask for a custom quote</a>.</p>
+        <p><strong>Need something not listed?</strong> I’m happy to customize care to your pet’s needs. 💜</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container" style="display:grid; gap:1.25rem; align-items:center">
+      <div>
+        <h2 class="h2">About Mimi’s Animal Care</h2>
+        <p>Hi there, I’m Miriam — but my furry, feathered, and scaly friends just call me <em>Mimi</em>! 🐾💜 For over 10 years, I’ve been caring for animals of all kinds — from bouncy puppies and cuddly cats to pets with special medical needs. Animals have always been my passion, and I treat every single one like part of my own family.</p>
+        <p>Whether it’s a quick potty break, a long walk, a cozy overnight stay, or an epic 3-hour adventure, I’m here to make tails wag, whiskers twitch, and feathers flutter. Every pet deserves love, patience, and plenty of playtime — and I make sure they get exactly that.</p>
+        <p><strong>Got a special request?</strong> Need help with something not listed? Just ask! I happily customize care to fit your pet’s personality and needs. I serve Genesee, Lapeer, and Saginaw — and I’ll travel farther with a little notice.</p>
+      </div>
+       <!-- GALLERY (new) -->
+  <section id="gallery" class="section gallery">
+    <div class="container">
+      <h2 class="h2">Furry faces and fun places!</h2>
+      <p class="muted" style="margin-bottom:1rem">Swipe or tap the arrows to see more.</p>
+
+      <div class="carousel">
+        <button class="carousel-btn prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="carousel-viewport" id="carViewport">
+          <div class="carousel-track" id="carTrack">
+            <!-- 12 example images; replace with your own file paths -->
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-01.jpg" alt="Adventure photo 1"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-02.jpg" alt="Adventure photo 2"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-03.jpg" alt="Adventure photo 3"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-04.jpg" alt="Adventure photo 4"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-05.jpg" alt="Adventure photo 5"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-06.jpg" alt="Adventure photo 6"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-07.jpg" alt="Adventure photo 7"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-08.jpg" alt="Adventure photo 8"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-09.jpg" alt="Adventure photo 9"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-10.jpg" alt="Adventure photo 10"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-11.jpg" alt="Adventure photo 11"></div></div>
+            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-12.jpg" alt="Adventure photo 12"></div></div>
+          </div>
+        </div>
+
+        <button class="carousel-btn next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="section alt">
+    <div class="container">
+      <h2 class="h2">Happy Clients</h2>
+      <div class="grid-cards">
+        <figure class="card"><blockquote>“Mimi is amazing! Daily photos and our anxious pup warmed up immediately.”</blockquote><figcaption class="tiny">— Alex R.</figcaption></figure>
+        <figure class="card"><blockquote>“Reliable, kind, and professional. Our cats were relaxed when we got home.”</blockquote><figcaption class="tiny">— Priya M.</figcaption></figure>
+        <figure class="card"><blockquote>“The walk notes and pics are the best. Five stars.”</blockquote><figcaption class="tiny">— Jordan K.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="h2">FAQ</h2>
+      <div class="grid-cards" style="grid-template-columns:1fr; gap:14px">
+        <details class="faq"><summary>Are you insured and background checked?</summary><p>Yes—your pet and home are protected. Documentation available upon request.</p></details>
+        <details class="faq"><summary>How do meet &amp; greets work?</summary><p>We’ll visit your home to learn routines, meet your pets, and confirm services. It’s free.</p></details>
+        <details class="faq"><summary>Do you administer medications?</summary><p>Yes—pills, drops, and some injections with prior instructions.</p></details>
+        <details class="faq"><summary>What’s your service area?</summary><p>Genesee, Lapeer, and Saginaw counties — and I can travel farther after we discuss pricing.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section" style="background:#0f172a;color:#fff">
+    <div class="container" style="display:grid; gap:1.25rem; align-items:start">
+      <div>
+        <h2 class="h2" style="color:#fff">Book a Meet &amp; Greet</h2>
+        <p class="muted" style="color:#cbd5e1">Tell me about your pets and preferred dates. I’ll reply within a business day.</p>
+        <p class="small" style="color:#cbd5e1">Prefer to call? <a class="link-underline" style="color:#fff" href="tel:+18104497159">(810) 449-7159</a></p>
+        <p class="small" style="color:#cbd5e1">Email: <a class="link-underline" style="color:#fff" href="mailto:hello@example.com">hello@example.com</a></p>
+      </div>
+
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden" aria-hidden="true"><label>Don’t fill this out if you’re human: <input name="bot-field" /></label></p>
+
+        <div class="field"><span>Name</span><input name="name" required /></div>
+        <div class="field"><span>Phone</span><input name="phone" required /></div>
+        <div class="field"><span>Email</span><input type="email" name="email" /></div>
+        <div class="field">
+          <span>What service's are you interested in?</span>
+          <select name="service">
+            <option>Dog Walking</option>
+            <option>In-Home Sitting</option>
+            <option>Potty Break</option>
+            <option>3-Hour Adventure Day</option>
+            <option>Cat/Small Animal Care</option>
+            <option>Other / Custom</option>
+          </select>
+        </div>
+        <div class="field"><span>Details</span><textarea name="message" rows="5" placeholder="Tell me about your pet’s routine, dates, special needs, and location..."></textarea></div>
+
+        <button class="btn btn-primary" style="width:100%; margin-top:.3rem">Send Request</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display:grid; gap:1rem; align-items:start; grid-template-columns:1fr; }
+      @media(min-width:900px){ grid-template-columns: repeat(3,1fr); }">
+      <div style="display:flex; align-items:center; gap:.5rem">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0m9 0a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0M14 4a2 2 0 1 1-4 0a2 2 0 0 1 4 0M7.5 12.5c0-2.2 2.6-4 5.5-4s5.5 1.8 5.5 4c0 1.9-2 4.5-5.5 7c-3.5-2.5-5.5-5.1-5.5-7Z"/></svg>
+        <strong>Mimi’s Animal Care</strong>
+      </div>
+      <div>
+        <p><a href="#services">Services</a></p>
+        <p><a href="#pricing">Pricing</a></p>
+        <p><a href="#reviews">Reviews</a></p>
+      </div>
+      <div class="small">
+        <p>&copy; <span id="year"></span> Mimi’s Animal Care. All rights reserved.</p>
+        <p>Genesee • Lapeer • Saginaw • (810) 449-7159</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  const hamb = document.getElementById('hamb');
+  const closeI = document.getElementById('close');
+  btn?.addEventListener('click', () => {
+    const open = window.getComputedStyle(menu).display === 'none';
+    menu.style.display = open ? 'block' : 'none';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    hamb.classList.toggle('hidden');
+    closeI.classList.toggle('hidden');
+  });
+  // Close on link tap
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.style.display = 'none';
+    btn.setAttribute('aria-expanded', 'false');
+    hamb.classList.remove('hidden');
+    closeI.classList.add('hidden');
+  }));
+
+  // ===== Gallery controls (3-at-a-time) =====
+  (function(){
+    const track = document.getElementById('carTrack');
+    const viewport = document.getElementById('carViewport');
+    const prev = document.querySelector('.carousel-btn.prev');
+    const next = document.querySelector('.carousel-btn.next');
+
+    const itemsPerView = 3;
+    const totalItems = track ? track.children.length : 0;
+    const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerView));
+    let pageIndex = 0;
+
+    function update(){
+      // Move exactly one viewport width per page
+      const offset = pageIndex * viewport.clientWidth;
+      track.style.transform = `translateX(-${offset}px)`;
+    }
+    function goPrev(){
+      pageIndex = (pageIndex - 1 + totalPages) % totalPages;
+      update();
+    }
+    function goNext(){
+      pageIndex = (pageIndex + 1) % totalPages;
+      update();
+    }
+
+    prev?.addEventListener('click', goPrev);
+    next?.addEventListener('click', goNext);
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+</body>
+</html>
