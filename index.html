@@ -7,146 +7,116 @@
 <meta name="description" content="Friendly, reliable pet care by Mimi: dog walking, potty breaks, in-home sitting, 3-hour adventures, and cat/small animal care. Serving Genesee, Lapeer, Saginaw — travel available." />
 
 <style>
-/* ===== Reset-ish & theme ===== */
+/* ===== Theme / Reset ===== */
 :root{
-  --purple:#7c3aed;        /* primary */
-  --purple-dark:#5b21b6;   /* hover/dark */
-  --lav:#f5f3ff;           /* light bg */
-  --ink:#0f172a;           /* headings */
-  --muted:#475569;         /* body text */
-  --ring:#e6e6f0;          /* borders */
-  --radius:16px;
-  --container:1100px;
+  --purple:#7c3aed; --purple-dark:#5b21b6;
+  --lav:#f5f3ff; --ink:#0f172a; --muted:#475569; --ring:#e6e6f0;
+  --radius:16px; --container:1100px;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-  color:var(--ink); background:#fff; line-height:1.55;
-}
-h1,h2,h3{margin:0 0 .35rem 0; font-weight:800; color:var(--ink)}
-p{margin:.25rem 0 1rem}
-a{color:var(--purple); text-decoration:none}
-a:hover{text-decoration:underline}
-img{max-width:100%; height:auto; display:block}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+h1,h2,h3{margin:0 0 .35rem 0;font-weight:800;color:var(--ink)} p{margin:.25rem 0 1rem}
+a{color:var(--purple);text-decoration:none} a:hover{text-decoration:underline}
+img{max-width:100%;height:auto;display:block}
 
-/* ===== Layout helpers ===== */
-.section{padding:3rem 1rem}
-.container{max-width:var(--container); margin:0 auto}
-.alt{background:var(--lav)}
-.h1{font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900}
-.h2{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:900; color:var(--purple)}
-.lead{color:var(--muted); font-size:1.05rem}
-.small{color:var(--muted); font-size:.95rem}
-.muted{color:var(--muted)}
-.fineprint{font-size:.92rem; color:var(--muted)}
-.accent{color:var(--purple)}
+/* ===== Layout ===== */
+.section{padding:3rem 1rem} .container{max-width:var(--container);margin:0 auto}
+.alt{background:var(--lav)} .h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900}
+.h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:var(--purple)}
+.lead{color:var(--muted);font-size:1.05rem} .small{color:var(--muted);font-size:.95rem}
+.muted{color:var(--muted)} .fineprint{font-size:.92rem;color:var(--muted)} .accent{color:var(--purple)}
 
-/* ===== Topbar & header ===== */
-.topbar{background:#111827; color:#fff; font-size:.9rem}
-.topbar .container{display:flex; gap:1rem; justify-content:space-between; padding:.6rem 1rem}
-.link-underline{text-decoration:underline; text-underline-offset:2px}
-
-header{position:sticky; top:0; z-index:50; backdrop-filter:blur(6px); background:#ffffffd9; border-bottom:1px solid #e5e7eb}
-.nav{display:none; gap:1rem; font-size:.95rem}
-.brand{display:flex; align-items:center; gap:.6rem; color:inherit; text-decoration:none}
-.icon-btn{border:1px solid #cbd5e1; padding:.45rem .6rem; border-radius:12px; background:#fff; display:inline-flex; align-items:center; gap:.25rem}
-
-@media (min-width:768px){ .nav{display:flex} }
-
-/* Mobile menu */
-.mobile{display:none; padding:0 1rem 1rem}
-.mobile a{display:block; padding:.65rem .75rem; border-radius:10px}
+/* ===== Topbar / Header ===== */
+.topbar{background:#111827;color:#fff;font-size:.9rem}
+.topbar .container{display:flex;gap:1rem;justify-content:space-between;padding:.6rem 1rem}
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(6px);background:#ffffffd9;border-bottom:1px solid #e5e7eb}
+.nav{display:none;gap:1rem;font-size:.95rem}.brand{display:flex;align-items:center;gap:.6rem;color:inherit}
+.icon-btn{border:1px solid #cbd5e1;padding:.45rem .6rem;border-radius:12px;background:#fff;display:inline-flex;align-items:center;gap:.25rem}
+@media(min-width:768px){.nav{display:flex}}
+.mobile{display:none;padding:0 1rem 1rem}.mobile a{display:block;padding:.65rem .75rem;border-radius:10px}
 .mobile a:hover{background:#f3e8ff}
 
 /* ===== Hero ===== */
-.hero{background:linear-gradient(135deg,#faf5ff, #ffffff 35%, #fdf4ff)}
-.hero-grid{display:grid; gap:1.25rem}
-@media (min-width:900px){ .hero-grid{grid-template-columns: 1fr 1fr; align-items:center} }
-.hero-img{width:100%; height:220px; object-fit:cover; border-radius:24px; box-shadow:0 18px 40px rgba(0,0,0,.08); border:1px solid #e2e8f0}
-@media(min-width:768px){ .hero-img{height:320px} }
+.hero{background:linear-gradient(135deg,#faf5ff,#ffffff 35%,#fdf4ff)}
+.hero-grid{display:grid;gap:1.25rem}@media(min-width:900px){.hero-grid{grid-template-columns:1fr 1fr;align-items:center}}
+.hero-img{width:100%;height:220px;object-fit:cover;border-radius:24px;box-shadow:0 18px 40px rgba(0,0,0,.08);border:1px solid #e2e8f0}
+@media(min-width:768px){.hero-img{height:320px}}
 
 /* ===== Buttons ===== */
-.btn{display:inline-flex; align-items:center; justify-content:center; padding:.9rem 1.1rem; border-radius:12px; font-weight:700; border:0; cursor:pointer}
-.btn-primary{background:var(--purple); color:#fff}
-.btn-primary:hover{background:var(--purple-dark)}
-.btn-secondary{background:#fff; color:var(--purple); border:2px solid var(--purple)}
-.btn-secondary:hover{background:#ede9fe}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.1rem;border-radius:12px;font-weight:700;border:0;cursor:pointer}
+.btn-primary{background:var(--purple);color:#fff}.btn-primary:hover{background:var(--purple-dark)}
+.btn-secondary{background:#fff;color:var(--purple);border:2px solid var(--purple)}.btn-secondary:hover{background:#ede9fe}
 
-/* ===== Cards / Services / Pricing ===== */
-.grid-cards{display:grid; grid-template-columns:1fr; gap:14px}
-@media(min-width:640px){ .grid-cards{grid-template-columns:repeat(2,1fr)} }
-@media(min-width:960px){ .grid-cards{grid-template-columns:repeat(3,1fr)} }
-
-.card, .service-card{
-  background:#fff; border:1px solid var(--ring); border-radius:var(--radius); padding:18px;
-}
-.service-card:hover{background:var(--lav)}
-.badge{display:inline-block; font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; background:#ede9fe; color:var(--purple); padding:.25rem .5rem; border-radius:999px; margin-bottom:.5rem}
-.featured{outline:2px solid #e9d5ff; box-shadow:0 12px 28px rgba(92,43,180,.10)}
-.sub{color:var(--muted); margin:.25rem 0 .5rem}
-.price{font-size:2rem; font-weight:900; color:var(--ink)}
-ul.bullets{margin:.75rem 0 0; padding-left:1.1rem; color:var(--muted)}
-ul.bullets li{margin:.25rem 0}
-.tiny{font-size:.85rem; color:var(--muted); margin-top:.2rem}
-
+/* ===== Services / Cards ===== */
+.grid-cards{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.grid-cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.grid-cards{grid-template-columns:repeat(3,1fr)}}
+.card,.service-card{background:#fff;border:1px solid var(--ring);border-radius:var(--radius);padding:18px}
+.service-card{cursor:pointer;transition:transform .15s ease, background-color .15s ease}
+.service-card:hover{background:var(--lav);transform:translateY(-2px)}
+.badge{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;background:#ede9fe;color:var(--purple);padding:.25rem .5rem;border-radius:999px;margin-bottom:.5rem}
+.featured{outline:2px solid #e9d5ff;box-shadow:0 12px 28px rgba(92,43,180,.10)}
+.sub{color:var(--muted);margin:.25rem 0 .5rem}.price{font-size:2rem;font-weight:900;color:var(--ink)}
+ul.bullets{margin:.75rem 0 0;padding-left:1.1rem;color:var(--muted)}ul.bullets li{margin:.25rem 0}
+.tiny{font-size:.85rem;color:var(--muted);margin-top:.2rem}
 .pricing{background:var(--lav)}
 
+/* ===== About (fixed width / never overflows) ===== */
+.about-wrap{display:grid;gap:1.25rem;align-items:center}
+.about-text{max-width:800px;margin:0 auto;padding:0 0;line-height:1.7;word-wrap:break-word}
+.about-text p{margin-bottom:1rem}
+
 /* ===== FAQ ===== */
-.faq{border:1px solid var(--ring); border-radius:12px; padding:14px; background:#fff}
-.faq summary{font-weight:700; cursor:pointer}
-.faq p{color:var(--muted); margin-top:.45rem}
+.faq{border:1px solid var(--ring);border-radius:12px;padding:14px;background:#fff}
+.faq summary{font-weight:700;cursor:pointer}.faq p{color:var(--muted);margin-top:.45rem}
 
 /* ===== Form ===== */
-.form{background:#fff; border:1px solid var(--ring); border-radius:var(--radius); padding:18px; box-shadow:0 12px 32px rgba(17,24,39,.06)}
-.field{display:flex; flex-direction:column; gap:.4rem}
-.field span{font-size:.9rem; color:#334155}
-.field input,.field select,.field textarea{
-  width:100%; border:1px solid #cbd5e1; border-radius:12px; padding:.8rem .9rem; outline:none; font:inherit;
-}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#c4b5fd; box-shadow:0 0 0 3px #ede9fe}
-
-/* ===== GALLERY (3-at-a-time carousel) ===== */
-.gallery{background:#fff}
-.carousel{position:relative}
-.carousel-viewport{overflow:hidden}
-.carousel-track{
-  display:flex;
-  transition:transform .45s ease;
-  will-change:transform;
-}
-.carousel-item{
-  flex:0 0 33.3333%; /* 3 per view */
-}
-.carousel-card{
-  padding:.5rem;
-}
-.carousel-card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border-radius:14px;
-  border:1px solid var(--ring);
-  box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-@media(min-width:900px){
-  .carousel-card img{height:220px}
-}
-.carousel-btn{
-  position:absolute; top:50%; transform:translateY(-50%);
-  background:#fff; border:1px solid #d1d5db; width:44px; height:44px; border-radius:999px;
-  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-.carousel-btn:hover{background:#f8fafc}
-.carousel-btn svg{width:22px;height:22px;stroke:#374151}
-.carousel-btn.prev{left:-6px}
-.carousel-btn.next{right:-6px}
+.form{background:#fff;border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:0 12px 32px rgba(17,24,39,.06)}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field span{font-size:.9rem;color:#334155}
+.field input,.field select,.field textarea{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:.8rem .9rem;outline:none;font:inherit}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#c4b5fd;box-shadow:0 0 0 3px #ede9fe}
 
 /* ===== Footer ===== */
-footer{background:var(--purple); color:#fff; padding:2rem 1rem; margin-top:2rem}
-footer a{color:#fff}
-footer a:hover{text-decoration:underline}
+footer{background:var(--purple);color:#fff;padding:2rem 1rem;margin-top:2rem}
+footer a{color:#fff} footer a:hover{text-decoration:underline}
+
+/* ===== Booking Modal / Calendar ===== */
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;max-width:960px;width:100%;border:1px solid var(--ring)}
+.modal header{position:relative;background:var(--lav);border-bottom:1px solid var(--ring)}
+.modal header h3{color:var(--purple);padding:1rem 1.25rem}
+.modal .body{padding:1rem 1.25rem}
+.modal .close{position:absolute;right:.75rem;top:.75rem;border:1px solid #cbd5e1;background:#fff;border-radius:10px;padding:.35rem .5rem;cursor:pointer}
+.modal .grid{display:grid;gap:12px}
+@media(min-width:860px){.modal .grid{grid-template-columns: 1.2fr .8fr}}
+.calendar{border:1px solid var(--ring);border-radius:14px;overflow:hidden}
+.cal-head{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem;background:#fafafa;border-bottom:1px solid var(--ring)}
+.cal-title{font-weight:800}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-top:1px solid var(--ring)}
+.cal-day, .cal-cell{padding:.55rem .35rem;text-align:center;border-right:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;font-size:.9rem}
+.cal-day{background:#f8fafc;font-weight:700}
+.cal-cell{min-height:46px;cursor:pointer}
+.cal-cell.muted{color:#94a3b8}
+.cal-cell.selected{background:#ede9fe}
+.cal-cell.booked{background:#e2e8f0;color:#64748b;cursor:not-allowed}
+.cal-legend{display:flex;gap:8px;align-items:center;font-size:.85rem;color:#64748b;margin-top:.5rem}
+.legend-swatch{width:12px;height:12px;border-radius:3px;border:1px solid #cbd5e1}
+.swatch-free{background:#fff}.swatch-selected{background:#ede9fe}.swatch-booked{background:#e2e8f0}
+
+/* time picker */
+.time-box{border:1px solid var(--ring);border-radius:14px;padding:.75rem}
+.time-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:.5rem}
+.time-slot{padding:.5rem .4rem;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;font-size:.9rem}
+.time-slot.unavailable{opacity:.4;cursor:not-allowed;background:#f8fafc}
+.time-slot.selected{outline:2px solid #c4b5fd;background:#ede9fe}
+.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.divider{height:1px;background:#eef2f7;margin:.8rem 0}
+.note{font-size:.82rem;color:#64748b}
+
+/* actions */
+.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
+.btn-ghost{border:1px solid #cbd5e1;background:#fff;color:#111827}
 </style>
 </head>
 
@@ -212,22 +182,22 @@ footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- Services (clickable) -->
   <section id="services" class="section">
     <div class="container">
       <h2 class="h2">Services</h2>
-      <p class="muted">Flexible, friendly care for every personality and routine.</p>
+      <p class="muted">Tap any service to pick dates &amp; times.</p>
 
       <div class="grid-cards">
-        <article class="service-card"><h3>Dog Walking</h3><p>30/45/60-minute walks with photo updates (leash manners encouraged!).</p></article>
-        <article class="service-card"><h3>In-Home Pet Sitting</h3><p>Keep routines cozy at home — overnights available.</p></article>
-        <article class="service-card"><h3>Potty Breaks</h3><p>Quick relief visits with water refresh, notes, and a cuddle.</p></article>
-        <article class="service-card"><h3>3-Hour Adventure Day</h3><p>Park time, enrichment games, and a scenic stroll — pure joy!</p></article>
-        <article class="service-card"><h3>Cats &amp; Small Animals</h3><p>Play, litter refresh, meds, and gentle company for shy friends.</p></article>
-        <article class="service-card"><h3>Custom Care — Just Ask!</h3><p>Pets with special medical needs welcome. If it’s not listed, ask!</p></article>
+        <article class="service-card" data-service="Dog Walking" data-default-hours="1"><h3>Dog Walking</h3><p>30/45/60-minute walks with photo updates (leash manners encouraged!).</p></article>
+        <article class="service-card" data-service="In-Home Pet Sitting" data-default-hours="12"><h3>In-Home Pet Sitting</h3><p>Keep routines cozy at home — overnights available.</p></article>
+        <article class="service-card" data-service="Potty Break" data-default-hours="0.25"><h3>Potty Breaks</h3><p>Quick relief visits with water refresh, notes, and a cuddle.</p></article>
+        <article class="service-card" data-service="3-Hour Adventure Day" data-default-hours="3"><h3>3-Hour Adventure Day</h3><p>Park time, enrichment games, and a scenic stroll — pure joy!</p></article>
+        <article class="service-card" data-service="Cats & Small Animals" data-default-hours="0.5"><h3>Cats &amp; Small Animals</h3><p>Play, litter refresh, meds, and gentle company for shy friends.</p></article>
+        <article class="service-card" data-service="Custom Care" data-default-hours="1"><h3>Custom Care — Just Ask!</h3><p>Pets with special medical needs welcome. If it’s not listed, ask!</p></article>
       </div>
 
-      <p class="fineprint" style="margin-top:.8rem">Travel to other locations available after a price is discussed.</p>
+      <p class="fineprint" style="margin-top:.8rem">A 1-hour buffer is automatically added before and after hourly services to allow for drive time.</p>
     </div>
   </section>
 
@@ -238,102 +208,28 @@ footer a:hover{text-decoration:underline}
       <p class="muted">Simple, transparent rates. Holiday &amp; weekend adjustments shown below.</p>
 
       <div class="grid-cards">
-        <article class="card">
-          <h3>Potty Break</h3>
-          <p class="sub">15 minutes</p>
-          <p class="price">$15</p>
-          <ul class="bullets"><li>Quick relief &amp; water</li><li>Photo update</li></ul>
-        </article>
-
-        <article class="card featured">
-          <p class="badge">Most booked</p>
-          <h3>Walk / Drop-in</h3>
-          <p class="sub">30 minutes</p>
-          <p class="price">$20</p>
-          <ul class="bullets"><li>Feeding/meds on request</li><li>Notes &amp; pics</li></ul>
-        </article>
-
-        <article class="card">
-          <h3>Walk / Drop-in</h3>
-          <p class="sub">60 minutes</p>
-          <p class="price">$30</p>
-          <ul class="bullets"><li>Enrichment &amp; playtime</li><li>Great for high-energy pets</li></ul>
-        </article>
-
-        <article class="card">
-          <h3>Cats &amp; Small Animals</h3>
-          <p class="sub">30 minutes</p>
-          <p class="price">$20</p>
-          <ul class="bullets"><li>Litter/habitat refresh</li><li>Gentle company</li></ul>
-        </article>
-
-        <article class="card">
-          <h3>Overnight Sitting</h3>
-          <p class="sub">In-home • 10–12 hrs</p>
-          <p class="price">$40</p>
-          <p class="tiny">Fri–Sun $85 • Holidays $95</p>
-          <ul class="bullets"><li>Evening &amp; morning walk</li><li>Regular updates</li></ul>
-        </article>
-
-        <article class="card">
-          <h3>Adventure Outing</h3>
-          <p class="sub">3 hours</p>
-          <p class="price">from $60</p>
-          <ul class="bullets"><li>Park + enrichment games</li><li>Post-adventure recap</li></ul>
-        </article>
-      </div>
-
-      <div class="fineprint">
-        <p><strong>Extras:</strong> +$5 per additional pet (walks: +$5 per additional dog). <strong>Travel:</strong> first 30 miles included; +$0.50/mi after that. Over 50 miles? <a href="#contact">Ask for a custom quote</a>.</p>
-        <p><strong>Need something not listed?</strong> I’m happy to customize care to your pet’s needs. 💜</p>
+        <article class="card"><h3>Potty Break</h3><p class="sub">15 minutes</p><p class="price">$15</p><ul class="bullets"><li>Quick relief &amp; water</li><li>Photo update</li></ul></article>
+        <article class="card featured"><p class="badge">Most booked</p><h3>Walk / Drop-in</h3><p class="sub">30 minutes</p><p class="price">$20</p><ul class="bullets"><li>Feeding/meds on request</li><li>Notes &amp; pics</li></ul></article>
+        <article class="card"><h3>Walk / Drop-in</h3><p class="sub">60 minutes</p><p class="price">$30</p><ul class="bullets"><li>Enrichment &amp; playtime</li><li>Great for high-energy pets</li></ul></article>
+        <article class="card"><h3>Cats &amp; Small Animals</h3><p class="sub">30 minutes</p><p class="price">$20</p><ul class="bullets"><li>Litter/habitat refresh</li><li>Gentle company</li></ul></article>
+        <article class="card"><h3>Overnight Sitting</h3><p class="sub">In-home • 10–12 hrs</p><p class="price">$40</p><p class="tiny">Fri–Sun $85 • Holidays $95</p><ul class="bullets"><li>Evening &amp; morning walk</li><li>Regular updates</li></ul></article>
+        <article class="card"><h3>Adventure Outing</h3><p class="sub">3 hours</p><p class="price">from $60</p><ul class="bullets"><li>Park + enrichment games</li><li>Post-adventure recap</li></ul></article>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- About (fixed) -->
   <section id="about" class="section">
-    <div class="container" style="display:grid; gap:1.25rem; align-items:center">
-      <div>
+    <div class="container about-wrap">
+      <div class="about-text">
         <h2 class="h2">About Mimi’s Animal Care</h2>
         <p>Hi there, I’m Miriam — but my furry, feathered, and scaly friends just call me <em>Mimi</em>! 🐾💜 For over 10 years, I’ve been caring for animals of all kinds — from bouncy puppies and cuddly cats to pets with special medical needs. Animals have always been my passion, and I treat every single one like part of my own family.</p>
         <p>Whether it’s a quick potty break, a long walk, a cozy overnight stay, or an epic 3-hour adventure, I’m here to make tails wag, whiskers twitch, and feathers flutter. Every pet deserves love, patience, and plenty of playtime — and I make sure they get exactly that.</p>
         <p><strong>Got a special request?</strong> Need help with something not listed? Just ask! I happily customize care to fit your pet’s personality and needs. I serve Genesee, Lapeer, and Saginaw — and I’ll travel farther with a little notice.</p>
       </div>
-       <!-- GALLERY (new) -->
-  <section id="gallery" class="section gallery">
-    <div class="container">
-      <h2 class="h2">Furry faces and fun places!</h2>
-      <p class="muted" style="margin-bottom:1rem">Swipe or tap the arrows to see more.</p>
-
-      <div class="carousel">
-        <button class="carousel-btn prev" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-
-        <div class="carousel-viewport" id="carViewport">
-          <div class="carousel-track" id="carTrack">
-            <!-- 12 example images; replace with your own file paths -->
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-01.jpg" alt="Adventure photo 1"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-02.jpg" alt="Adventure photo 2"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-03.jpg" alt="Adventure photo 3"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-04.jpg" alt="Adventure photo 4"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-05.jpg" alt="Adventure photo 5"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-06.jpg" alt="Adventure photo 6"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-07.jpg" alt="Adventure photo 7"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-08.jpg" alt="Adventure photo 8"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-09.jpg" alt="Adventure photo 9"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-10.jpg" alt="Adventure photo 10"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-11.jpg" alt="Adventure photo 11"></div></div>
-            <div class="carousel-item"><div class="carousel-card"><img src="Pictures/gal-12.jpg" alt="Adventure photo 12"></div></div>
-          </div>
-        </div>
-
-        <button class="carousel-btn next" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+      <div>
+        <img class="hero-img" src="Pictures/about-hero.jpg" alt="Mimi with a happy dog">
       </div>
-    </div>
-  </section>
     </div>
   </section>
 
@@ -348,8 +244,6 @@ footer a:hover{text-decoration:underline}
       </div>
     </div>
   </section>
-
- 
 
   <!-- FAQ -->
   <section id="faq" class="section">
@@ -419,11 +313,80 @@ footer a:hover{text-decoration:underline}
     </div>
   </footer>
 
+<!-- ===== Booking Modal ===== -->
+<div id="bookingModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal">
+    <header>
+      <h3 id="modalTitle">Book Service</h3>
+      <button class="close" id="closeModal" aria-label="Close">✕</button>
+    </header>
+    <div class="body">
+      <div class="grid">
+        <!-- Calendar -->
+        <div>
+          <div class="calendar">
+            <div class="cal-head">
+              <button class="btn btn-ghost" id="prevMonth" aria-label="Previous month">‹</button>
+              <div class="cal-title" id="monthLabel">Month YYYY</div>
+              <button class="btn btn-ghost" id="nextMonth" aria-label="Next month">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+          <div class="cal-legend">
+            <span class="legend-swatch swatch-free"></span> Free
+            <span class="legend-swatch swatch-selected"></span> Selected
+            <span class="legend-swatch swatch-booked"></span> Busy/Blocked
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div>
+          <div class="time-box">
+            <div class="inline">
+              <label class="field" style="flex:1">
+                <span>Service</span>
+                <select id="svcSelect">
+                  <option>Dog Walking</option>
+                  <option>In-Home Pet Sitting</option>
+                  <option>Potty Break</option>
+                  <option>3-Hour Adventure Day</option>
+                  <option>Cats & Small Animals</option>
+                  <option>Custom Care</option>
+                </select>
+              </label>
+              <label class="field" style="width:110px">
+                <span>Hours</span>
+                <input id="hoursInput" type="number" step="0.25" min="0.25" value="1">
+              </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <label class="field">
+              <span>Pick a start time</span>
+              <div id="timeRow" class="time-row"></div>
+            </label>
+
+            <p class="note">We automatically add a 1-hour travel buffer <em>before and after</em> each booking to keep things realistic.</p>
+
+            <div class="actions">
+              <button class="btn btn-secondary" id="clearSelection">Clear</button>
+              <button class="btn btn-primary" id="saveBooking" disabled>Add to Calendar</button>
+            </div>
+          </div>
+
+          <p class="note" style="margin-top:.6rem">Selected day: <strong id="selectedDayLabel">None</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  // Year
+  // Year in footer
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobile menu
+  // Mobile menu toggle
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('mobileMenu');
   const hamb = document.getElementById('hamb');
@@ -435,7 +398,6 @@ footer a:hover{text-decoration:underline}
     hamb.classList.toggle('hidden');
     closeI.classList.toggle('hidden');
   });
-  // Close on link tap
   menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     menu.style.display = 'none';
     btn.setAttribute('aria-expanded', 'false');
@@ -443,37 +405,220 @@ footer a:hover{text-decoration:underline}
     closeI.classList.add('hidden');
   }));
 
-  // ===== Gallery controls (3-at-a-time) =====
-  (function(){
-    const track = document.getElementById('carTrack');
-    const viewport = document.getElementById('carViewport');
-    const prev = document.querySelector('.carousel-btn.prev');
-    const next = document.querySelector('.carousel-btn.next');
+  /* ====== Booking Modal / Calendar Logic ====== */
+  // Data store (persist across refresh during testing)
+  const bookings = JSON.parse(localStorage.getItem('mimi_bookings') || '[]'); 
+  // booking: {service, startISO, endISO}
 
-    const itemsPerView = 3;
-    const totalItems = track ? track.children.length : 0;
-    const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerView));
-    let pageIndex = 0;
+  const serviceCards = document.querySelectorAll('.service-card');
+  const modal = document.getElementById('bookingModal');
+  const closeModalBtn = document.getElementById('closeModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const svcSelect = document.getElementById('svcSelect');
+  const hoursInput = document.getElementById('hoursInput');
+  const calGrid = document.getElementById('calGrid');
+  const monthLabel = document.getElementById('monthLabel');
+  const prevMonthBtn = document.getElementById('prevMonth');
+  const nextMonthBtn = document.getElementById('nextMonth');
+  const timeRow = document.getElementById('timeRow');
+  const saveBookingBtn = document.getElementById('saveBooking');
+  const clearSelectionBtn = document.getElementById('clearSelection');
+  const selectedDayLabel = document.getElementById('selectedDayLabel');
 
-    function update(){
-      // Move exactly one viewport width per page
-      const offset = pageIndex * viewport.clientWidth;
-      track.style.transform = `translateX(-${offset}px)`;
+  let viewYear, viewMonth; // 0-11
+  let selectedDate = null; // Date in current view
+  let selectedTime = null; // "HH:MM"
+
+  // Open modal when clicking a service
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const svc = card.dataset.service;
+      const defH = parseFloat(card.dataset.defaultHours || '1');
+      svcSelect.value = svc;
+      hoursInput.value = defH;
+      modalTitle.textContent = `Book: ${svc}`;
+      openModal();
+    });
+  });
+
+  function openModal(){
+    // set view to current month
+    const now = new Date();
+    viewYear = now.getFullYear();
+    viewMonth = now.getMonth();
+    selectedDate = null; selectedTime = null;
+    selectedDayLabel.textContent = 'None';
+    saveBookingBtn.disabled = true;
+    renderCalendar();
+    renderTimes();
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden','false');
+  }
+  function closeModal(){
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden','true');
+  }
+  closeModalBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+  prevMonthBtn.addEventListener('click', ()=>{ changeMonth(-1); });
+  nextMonthBtn.addEventListener('click', ()=>{ changeMonth(1); });
+
+  function changeMonth(delta){
+    viewMonth += delta;
+    if(viewMonth<0){viewMonth=11;viewYear--;}
+    if(viewMonth>11){viewMonth=0;viewYear++;}
+    selectedDate = null; selectedTime = null;
+    selectedDayLabel.textContent = 'None';
+    saveBookingBtn.disabled = true;
+    renderCalendar();
+    renderTimes();
+  }
+
+  function renderCalendar(){
+    const first = new Date(viewYear, viewMonth, 1);
+    const startDay = first.getDay(); // 0 Sun
+    const lastDate = new Date(viewYear, viewMonth+1, 0).getDate();
+    const prevLastDate = new Date(viewYear, viewMonth, 0).getDate();
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    monthLabel.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+
+    // Build header row
+    const weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    calGrid.innerHTML = weekdays.map(d=>`<div class="cal-day">${d}</div>`).join('');
+
+    // 42 cells (6 weeks)
+    const cells = [];
+    for(let i=0;i<42;i++){
+      const dayNum = i - startDay + 1;
+      let date, muted=false;
+      if(dayNum<1){ date = new Date(viewYear, viewMonth-1, prevLastDate + dayNum); muted=true; }
+      else if(dayNum>lastDate){ date = new Date(viewYear, viewMonth+1, dayNum - lastDate); muted=true; }
+      else { date = new Date(viewYear, viewMonth, dayNum); }
+
+      const isoDay = date.toISOString().slice(0,10);
+      const isBookedDay = dayHasAnyBooking(date);
+      const classes = ['cal-cell']; if(muted) classes.push('muted'); if(isBookedDay) classes.push('booked');
+      const selected = selectedDate && sameDay(date, selectedDate); if(selected) classes.push('selected');
+
+      cells.push(`<div class="${classes.join(' ')}" data-iso="${isoDay}" data-muted="${muted}">${date.getDate()}</div>`);
     }
-    function goPrev(){
-      pageIndex = (pageIndex - 1 + totalPages) % totalPages;
-      update();
-    }
-    function goNext(){
-      pageIndex = (pageIndex + 1) % totalPages;
-      update();
+    calGrid.insertAdjacentHTML('beforeend', cells.join(''));
+
+    // Add listeners
+    calGrid.querySelectorAll('.cal-cell').forEach(cell=>{
+      cell.addEventListener('click', ()=>{
+        if(cell.dataset.muted === 'true') return; // don't allow picking outside month
+        const iso = cell.getAttribute('data-iso');
+        const d = new Date(iso + 'T00:00:00');
+        selectedDate = d;
+        selectedTime = null;
+        selectedDayLabel.textContent = d.toDateString();
+        saveBookingBtn.disabled = true;
+        // refresh selection state
+        calGrid.querySelectorAll('.cal-cell').forEach(c=>c.classList.remove('selected'));
+        cell.classList.add('selected');
+        renderTimes();
+      });
+    });
+  }
+
+  function renderTimes(){
+    // Clear slots
+    timeRow.innerHTML = '';
+    // Generate hour slots 7:00 - 20:00
+    const hours = []; for(let h=7; h<=20; h++) hours.push(h);
+    const fmt = (h)=> (h<10? '0'+h : ''+h)+':00';
+    const isUnavailable = (h) => {
+      if(!selectedDate) return true;
+      const duration = parseFloat(hoursInput.value || '1'); // in hours
+      const start = new Date(selectedDate); start.setHours(h,0,0,0);
+      const end = new Date(start); end.setMinutes(end.getMinutes()+ duration*60);
+
+      // apply 1h buffer before and after: so consider protected window [start-60, end+60]
+      const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
+      const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
+
+      // within business window?
+      if(end.getHours()>21 || start.getHours()<6) return true;
+
+      // check overlap with existing bookings (comparing protected windows)
+      return bookings.some(b=>{
+        const bs = new Date(b.startISO), be = new Date(b.endISO);
+        // Windows cannot overlap: [protectStart, protectEnd] vs [bs, be] expanded by +/-60m as well
+        const bsProt = new Date(bs); bsProt.setMinutes(bsProt.getMinutes()-60);
+        const beProt = new Date(be); beProt.setMinutes(beProt.getMinutes()+60);
+        return protectStart < beProt && protectEnd > bsProt;
+      });
+    };
+
+    if(!selectedDate){
+      timeRow.insertAdjacentHTML('beforeend','<div class="note" style="grid-column:1/-1">Pick a day on the calendar.</div>');
+      return;
     }
 
-    prev?.addEventListener('click', goPrev);
-    next?.addEventListener('click', goNext);
-    window.addEventListener('resize', update);
-    update();
-  })();
+    hours.forEach(h=>{
+      const label = (h%12===0?12:h%12)+':00 '+(h<12?'AM':'PM');
+      const disabled = isUnavailable(h);
+      const div = document.createElement('button');
+      div.type='button';
+      div.className='time-slot'+(disabled?' unavailable':'');
+      div.textContent = label;
+      if(!disabled){
+        div.addEventListener('click', ()=>{
+          timeRow.querySelectorAll('.time-slot').forEach(t=>t.classList.remove('selected'));
+          div.classList.add('selected');
+          selectedTime = fmt(h);
+          saveBookingBtn.disabled = false;
+        });
+      }
+      timeRow.appendChild(div);
+    });
+  }
+
+  function dayHasAnyBooking(date){
+    // booked OR buffer makes day look "dim"? We'll mark booked days only
+    return bookings.some(b => sameDay(new Date(b.startISO), date));
+  }
+  function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+
+  // Save booking with buffers enforced
+  saveBookingBtn.addEventListener('click', ()=>{
+    if(!selectedDate || !selectedTime) return;
+    const hours = parseFloat(hoursInput.value||'1');
+    const start = new Date(selectedDate);
+    const [HH,MM]=selectedTime.split(':'); start.setHours(parseInt(HH),parseInt(MM),0,0);
+    const end = new Date(start); end.setMinutes(end.getMinutes()+hours*60);
+
+    // final conflict check with 1h buffer before + after both sides
+    const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
+    const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
+
+    const conflict = bookings.some(b=>{
+      const bs = new Date(b.startISO), be = new Date(b.endISO);
+      const bsProt = new Date(bs); bsProt.setMinutes(bsProt.getMinutes()-60);
+      const beProt = new Date(be); beProt.setMinutes(beProt.getMinutes()+60);
+      return protectStart < beProt && protectEnd > bsProt;
+    });
+    if(conflict){ alert('That time conflicts with another booking (including travel buffer). Try a different time.'); return; }
+
+    bookings.push({service:svcSelect.value,startISO:start.toISOString(),endISO:end.toISOString()});
+    localStorage.setItem('mimi_bookings', JSON.stringify(bookings));
+    alert('Added to calendar! This time is now blocked out with a travel buffer before and after.');
+    // reset picks
+    selectedTime = null; saveBookingBtn.disabled = true;
+    renderCalendar(); renderTimes();
+  });
+
+  clearSelectionBtn.addEventListener('click', ()=>{
+    selectedDate = null; selectedTime = null; saveBookingBtn.disabled = true;
+    selectedDayLabel.textContent = 'None';
+    renderCalendar(); renderTimes();
+  });
+
+  // Init month view in modal once opened
+  // (done in openModal)
+
 </script>
 </body>
 </html>
