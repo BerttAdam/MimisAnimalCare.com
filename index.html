@@ -46,6 +46,7 @@ header{position:sticky;top:0;z-index:50;backdrop-filter:blur(6px);background:#ff
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.1rem;border-radius:12px;font-weight:700;border:0;cursor:pointer}
 .btn-primary{background:var(--purple);color:#fff}.btn-primary:hover{background:var(--purple-dark)}
 .btn-secondary{background:#fff;color:var(--purple);border:2px solid var(--purple)}.btn-secondary:hover{background:#ede9fe}
+.btn-ghost{border:1px solid #cbd5e1;background:#fff;color:#111827}
 
 /* ===== Services / Cards ===== */
 .grid-cards{display:grid;grid-template-columns:1fr;gap:14px}
@@ -61,9 +62,9 @@ ul.bullets{margin:.75rem 0 0;padding-left:1.1rem;color:var(--muted)}ul.bullets l
 .tiny{font-size:.85rem;color:var(--muted);margin-top:.2rem}
 .pricing{background:var(--lav)}
 
-/* ===== About (fixed width / never overflows) ===== */
+/* ===== About (fixed) ===== */
 .about-wrap{display:grid;gap:1.25rem;align-items:center}
-.about-text{max-width:800px;margin:0 auto;padding:0 0;line-height:1.7;word-wrap:break-word}
+.about-text{max-width:800px;margin:0 auto;line-height:1.7;word-wrap:break-word}
 .about-text p{margin-bottom:1rem}
 
 /* ===== FAQ ===== */
@@ -83,7 +84,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 
 /* ===== Booking Modal / Calendar ===== */
 .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;padding:1rem}
-.modal{background:#fff;border-radius:18px;max-width:960px;width:100%;border:1px solid var(--ring)}
+.modal{background:#fff;border-radius:18px;max-width:980px;width:100%;border:1px solid var(--ring)}
 .modal header{position:relative;background:var(--lav);border-bottom:1px solid var(--ring)}
 .modal header h3{color:var(--purple);padding:1rem 1.25rem}
 .modal .body{padding:1rem 1.25rem}
@@ -116,7 +117,9 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 
 /* actions */
 .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
-.btn-ghost{border:1px solid #cbd5e1;background:#fff;color:#111827}
+
+/* Review box */
+.review{border:1px dashed #cbd5e1;border-radius:12px;padding:.6rem .8rem;background:#fafafa;margin-top:.6rem}
 </style>
 </head>
 
@@ -189,15 +192,15 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       <p class="muted">Tap any service to pick dates &amp; times.</p>
 
       <div class="grid-cards">
-        <article class="service-card" data-service="Dog Walking" data-default-hours="1"><h3>Dog Walking</h3><p>30/45/60-minute walks with photo updates (leash manners encouraged!).</p></article>
-        <article class="service-card" data-service="In-Home Pet Sitting" data-default-hours="12"><h3>In-Home Pet Sitting</h3><p>Keep routines cozy at home — overnights available.</p></article>
-        <article class="service-card" data-service="Potty Break" data-default-hours="0.25"><h3>Potty Breaks</h3><p>Quick relief visits with water refresh, notes, and a cuddle.</p></article>
-        <article class="service-card" data-service="3-Hour Adventure Day" data-default-hours="3"><h3>3-Hour Adventure Day</h3><p>Park time, enrichment games, and a scenic stroll — pure joy!</p></article>
-        <article class="service-card" data-service="Cats & Small Animals" data-default-hours="0.5"><h3>Cats &amp; Small Animals</h3><p>Play, litter refresh, meds, and gentle company for shy friends.</p></article>
-        <article class="service-card" data-service="Custom Care" data-default-hours="1"><h3>Custom Care — Just Ask!</h3><p>Pets with special medical needs welcome. If it’s not listed, ask!</p></article>
+        <article class="service-card" data-service="Dog Walking" data-default-hours="1" data-fullday="false"><h3>Dog Walking</h3><p>30/45/60-minute walks with photo updates (leash manners encouraged!).</p></article>
+        <article class="service-card" data-service="In-Home Pet Sitting (Overnight)" data-default-hours="12" data-fullday="true"><h3>In-Home Pet Sitting</h3><p>Keep routines cozy at home — overnights available.</p></article>
+        <article class="service-card" data-service="Potty Break" data-default-hours="0.25" data-fullday="false"><h3>Potty Breaks</h3><p>Quick relief visits with water refresh, notes, and a cuddle.</p></article>
+        <article class="service-card" data-service="3-Hour Adventure Day" data-default-hours="3" data-fullday="false"><h3>3-Hour Adventure Day</h3><p>Park time, enrichment games, and a scenic stroll — pure joy!</p></article>
+        <article class="service-card" data-service="Cats & Small Animals" data-default-hours="0.5" data-fullday="false"><h3>Cats &amp; Small Animals</h3><p>Play, litter refresh, meds, and gentle company for shy friends.</p></article>
+        <article class="service-card" data-service="Custom Care" data-default-hours="1" data-fullday="false"><h3>Custom Care — Just Ask!</h3><p>Pets with special medical needs welcome. If it’s not listed, ask!</p></article>
       </div>
 
-      <p class="fineprint" style="margin-top:.8rem">A 1-hour buffer is automatically added before and after hourly services to allow for drive time.</p>
+      <p class="fineprint" style="margin-top:.8rem">Hour-based services only block the selected hours. We automatically add a 1-hour travel buffer before and after each hourly booking.</p>
     </div>
   </section>
 
@@ -265,7 +268,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
         <h2 class="h2" style="color:#fff">Book a Meet &amp; Greet</h2>
         <p class="muted" style="color:#cbd5e1">Tell me about your pets and preferred dates. I’ll reply within a business day.</p>
         <p class="small" style="color:#cbd5e1">Prefer to call? <a class="link-underline" style="color:#fff" href="tel:+18104497159">(810) 449-7159</a></p>
-        <p class="small" style="color:#cbd5e1">Email: <a class="link-underline" style="color:#fff" href="mailto:hello@example.com">hello@example.com</a></p>
+        <p class="small" style="color:#cbd5e1">Email: <a class="link-underline" style="color:#fff" href="mailto:mnnehmi5420@gmail.com">mnnehmi5420@gmail.com</a></p>
       </div>
 
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
@@ -317,7 +320,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 <div id="bookingModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="modal">
     <header>
-      <h3 id="modalTitle">Book Service</h3>
+      <h3 id="modalTitle">Request Service</h3>
       <button class="close" id="closeModal" aria-label="Close">✕</button>
     </header>
     <div class="body">
@@ -335,19 +338,19 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
           <div class="cal-legend">
             <span class="legend-swatch swatch-free"></span> Free
             <span class="legend-swatch swatch-selected"></span> Selected
-            <span class="legend-swatch swatch-booked"></span> Busy/Blocked
+            <span class="legend-swatch swatch-booked"></span> Busy (full-day)
           </div>
         </div>
 
         <!-- Options -->
         <div>
           <div class="time-box">
-            <div class="inline">
+            <div class="inline" style="margin-bottom:.5rem">
               <label class="field" style="flex:1">
                 <span>Service</span>
                 <select id="svcSelect">
                   <option>Dog Walking</option>
-                  <option>In-Home Pet Sitting</option>
+                  <option>In-Home Pet Sitting (Overnight)</option>
                   <option>Potty Break</option>
                   <option>3-Hour Adventure Day</option>
                   <option>Cats & Small Animals</option>
@@ -360,6 +363,21 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
               </label>
             </div>
 
+            <div class="inline" style="margin-bottom:.5rem">
+              <label class="field" style="flex:1">
+                <span>Your Name</span>
+                <input id="custName" required placeholder="Jane Doe">
+              </label>
+              <label class="field" style="flex:1">
+                <span>Email</span>
+                <input id="custEmail" type="email" placeholder="you@example.com">
+              </label>
+              <label class="field" style="flex:1">
+                <span>Phone</span>
+                <input id="custPhone" placeholder="(###) ###-####">
+              </label>
+            </div>
+
             <div class="divider"></div>
 
             <label class="field">
@@ -367,11 +385,21 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
               <div id="timeRow" class="time-row"></div>
             </label>
 
-            <p class="note">We automatically add a 1-hour travel buffer <em>before and after</em> each booking to keep things realistic.</p>
+            <div class="review" id="reviewBox" style="display:none"></div>
+
+            <div class="inline" style="margin-top:.5rem">
+              <label style="display:flex;align-items:center;gap:.45rem">
+                <input type="checkbox" id="emailMimi" checked>
+                <span class="note">Email a notification to <strong>mnnehmi5420@gmail.com</strong></span>
+              </label>
+            </div>
+
+            <p class="note">Hour-based services only block the selected hours. A 1-hour travel buffer is added before and after. Full-day (overnight) can block the entire day.</p>
 
             <div class="actions">
-              <button class="btn btn-secondary" id="clearSelection">Clear</button>
-              <button class="btn btn-primary" id="saveBooking" disabled>Add to Calendar</button>
+              <button class="btn btn-secondary" id="clearSelection" type="button">Clear</button>
+              <button class="btn btn-ghost" id="confirmBtn" type="button" disabled>Review &amp; Confirm</button>
+              <button class="btn btn-primary" id="saveBooking" disabled type="button">Send Request</button>
             </div>
           </div>
 
@@ -382,11 +410,35 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   </div>
 </div>
 
+<!-- ===== Netlify Forms (hidden) ===== -->
+<form name="booking" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="hidden" name="form-name" value="booking" />
+  <input type="hidden" name="service" />
+  <input type="hidden" name="start" />
+  <input type="hidden" name="end" />
+  <input type="hidden" name="fullDay" />
+  <input type="hidden" name="name" />
+  <input type="hidden" name="email" />
+  <input type="hidden" name="phone" />
+  <input type="hidden" name="status" />
+</form>
+
+<form name="booking-status" data-netlify="true" hidden>
+  <input type="hidden" name="form-name" value="booking-status" />
+  <input type="hidden" name="id" />
+  <input type="hidden" name="status" />
+  <input type="hidden" name="service" />
+  <input type="hidden" name="start" />
+  <input type="hidden" name="end" />
+  <input type="hidden" name="customer" />
+</form>
+
 <script>
-  // Year in footer
+  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobile menu toggle
+  // Mobile menu
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('mobileMenu');
   const hamb = document.getElementById('hamb');
@@ -405,10 +457,9 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     closeI.classList.add('hidden');
   }));
 
-  /* ====== Booking Modal / Calendar Logic ====== */
-  // Data store (persist across refresh during testing)
-  const bookings = JSON.parse(localStorage.getItem('mimi_bookings') || '[]'); 
-  // booking: {service, startISO, endISO}
+  /* ====== Booking / Calendar Data ====== */
+  // booking: {id, service, startISO, endISO, fullDay, name, email, phone, status}
+  const bookings = JSON.parse(localStorage.getItem('mimi_bookings') || '[]');
 
   const serviceCards = document.querySelectorAll('.service-card');
   const modal = document.getElementById('bookingModal');
@@ -423,34 +474,40 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   const timeRow = document.getElementById('timeRow');
   const saveBookingBtn = document.getElementById('saveBooking');
   const clearSelectionBtn = document.getElementById('clearSelection');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const reviewBox = document.getElementById('reviewBox');
   const selectedDayLabel = document.getElementById('selectedDayLabel');
+  const custName = document.getElementById('custName');
+  const custEmail = document.getElementById('custEmail');
+  const custPhone = document.getElementById('custPhone');
+  const emailMimi = document.getElementById('emailMimi');
 
   let viewYear, viewMonth; // 0-11
-  let selectedDate = null; // Date in current view
+  let selectedDate = null; // Date
   let selectedTime = null; // "HH:MM"
+  let selectedFullDay = false;
 
-  // Open modal when clicking a service
+  // Open modal from service cards
   serviceCards.forEach(card => {
     card.addEventListener('click', () => {
       const svc = card.dataset.service;
       const defH = parseFloat(card.dataset.defaultHours || '1');
+      selectedFullDay = card.dataset.fullday === 'true';
       svcSelect.value = svc;
-      hoursInput.value = defH;
-      modalTitle.textContent = `Book: ${svc}`;
+      hoursInput.value = selectedFullDay ? 12 : defH;
+      modalTitle.textContent = `Request: ${svc}`;
       openModal();
     });
   });
 
   function openModal(){
-    // set view to current month
     const now = new Date();
-    viewYear = now.getFullYear();
-    viewMonth = now.getMonth();
+    viewYear = now.getFullYear(); viewMonth = now.getMonth();
     selectedDate = null; selectedTime = null;
     selectedDayLabel.textContent = 'None';
-    saveBookingBtn.disabled = true;
-    renderCalendar();
-    renderTimes();
+    saveBookingBtn.disabled = true; confirmBtn.disabled = true;
+    reviewBox.style.display = 'none'; reviewBox.textContent = '';
+    renderCalendar(); renderTimes();
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden','false');
   }
@@ -470,24 +527,22 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     if(viewMonth>11){viewMonth=0;viewYear++;}
     selectedDate = null; selectedTime = null;
     selectedDayLabel.textContent = 'None';
-    saveBookingBtn.disabled = true;
-    renderCalendar();
-    renderTimes();
+    saveBookingBtn.disabled = true; confirmBtn.disabled = true;
+    reviewBox.style.display='none'; reviewBox.textContent='';
+    renderCalendar(); renderTimes();
   }
 
   function renderCalendar(){
     const first = new Date(viewYear, viewMonth, 1);
-    const startDay = first.getDay(); // 0 Sun
+    const startDay = first.getDay();
     const lastDate = new Date(viewYear, viewMonth+1, 0).getDate();
     const prevLastDate = new Date(viewYear, viewMonth, 0).getDate();
     const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     monthLabel.textContent = `${monthNames[viewMonth]} ${viewYear}`;
 
-    // Build header row
     const weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     calGrid.innerHTML = weekdays.map(d=>`<div class="cal-day">${d}</div>`).join('');
 
-    // 42 cells (6 weeks)
     const cells = [];
     for(let i=0;i<42;i++){
       const dayNum = i - startDay + 1;
@@ -496,129 +551,218 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       else if(dayNum>lastDate){ date = new Date(viewYear, viewMonth+1, dayNum - lastDate); muted=true; }
       else { date = new Date(viewYear, viewMonth, dayNum); }
 
-      const isoDay = date.toISOString().slice(0,10);
-      const isBookedDay = dayHasAnyBooking(date);
-      const classes = ['cal-cell']; if(muted) classes.push('muted'); if(isBookedDay) classes.push('booked');
-      const selected = selectedDate && sameDay(date, selectedDate); if(selected) classes.push('selected');
+      const isFullDayBooked = bookings.some(b=>{
+        if(!b.fullDay) return false;
+        const bs = new Date(b.startISO), be = new Date(b.endISO);
+        return sameDay(bs, date) || sameDay(be, date) || (date>bs && date<be);
+      });
 
-      cells.push(`<div class="${classes.join(' ')}" data-iso="${isoDay}" data-muted="${muted}">${date.getDate()}</div>`);
+      const classes = ['cal-cell']; if(muted) classes.push('muted'); if(isFullDayBooked) classes.push('booked');
+      if(selectedDate && sameDay(date, selectedDate)) classes.push('selected');
+
+      cells.push(`<div class="${classes.join(' ')}" data-iso="${date.toISOString().slice(0,10)}" data-muted="${muted}">${date.getDate()}</div>`);
     }
     calGrid.insertAdjacentHTML('beforeend', cells.join(''));
 
-    // Add listeners
     calGrid.querySelectorAll('.cal-cell').forEach(cell=>{
       cell.addEventListener('click', ()=>{
-        if(cell.dataset.muted === 'true') return; // don't allow picking outside month
-        const iso = cell.getAttribute('data-iso');
-        const d = new Date(iso + 'T00:00:00');
-        selectedDate = d;
+        if(cell.dataset.muted === 'true') return;
+        selectedDate = new Date(cell.getAttribute('data-iso')+'T00:00:00');
         selectedTime = null;
-        selectedDayLabel.textContent = d.toDateString();
-        saveBookingBtn.disabled = true;
-        // refresh selection state
+        selectedDayLabel.textContent = selectedDate.toDateString();
+        saveBookingBtn.disabled = selectedFullDay ? true : true; // enable after confirm
+        confirmBtn.disabled = selectedFullDay ? false : true; // full-day can confirm immediately
         calGrid.querySelectorAll('.cal-cell').forEach(c=>c.classList.remove('selected'));
         cell.classList.add('selected');
+        reviewBox.style.display='none'; reviewBox.textContent='';
         renderTimes();
       });
     });
   }
 
   function renderTimes(){
-    // Clear slots
     timeRow.innerHTML = '';
-    // Generate hour slots 7:00 - 20:00
+    // Full-day: no time picking
+    if(selectedFullDay){
+      timeRow.insertAdjacentHTML('beforeend','<div class="note" style="grid-column:1/-1">This service blocks the day (overnight). Pick a date, click “Review & Confirm”, then “Send Request”.</div>');
+      return;
+    }
+    if(!selectedDate){
+      timeRow.insertAdjacentHTML('beforeend','<div class="note" style="grid-column:1/-1">Pick a day on the calendar.</div>');
+      return;
+    }
+
+    // Hour slots 7:00–20:00
     const hours = []; for(let h=7; h<=20; h++) hours.push(h);
     const fmt = (h)=> (h<10? '0'+h : ''+h)+':00';
+
     const isUnavailable = (h) => {
-      if(!selectedDate) return true;
-      const duration = parseFloat(hoursInput.value || '1'); // in hours
+      const duration = parseFloat(hoursInput.value || '1');
       const start = new Date(selectedDate); start.setHours(h,0,0,0);
       const end = new Date(start); end.setMinutes(end.getMinutes()+ duration*60);
-
-      // apply 1h buffer before and after: so consider protected window [start-60, end+60]
-      const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
-      const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
-
-      // within business window?
       if(end.getHours()>21 || start.getHours()<6) return true;
 
-      // check overlap with existing bookings (comparing protected windows)
       return bookings.some(b=>{
         const bs = new Date(b.startISO), be = new Date(b.endISO);
-        // Windows cannot overlap: [protectStart, protectEnd] vs [bs, be] expanded by +/-60m as well
+        if(b.fullDay){
+          if(sameDay(start, bs) || sameDay(start, be) || (start>bs && start<be)) return true;
+          return false;
+        }
+        // hourly: enforce 1h buffer both sides
+        const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
+        const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
         const bsProt = new Date(bs); bsProt.setMinutes(bsProt.getMinutes()-60);
         const beProt = new Date(be); beProt.setMinutes(beProt.getMinutes()+60);
         return protectStart < beProt && protectEnd > bsProt;
       });
     };
 
-    if(!selectedDate){
-      timeRow.insertAdjacentHTML('beforeend','<div class="note" style="grid-column:1/-1">Pick a day on the calendar.</div>');
-      return;
-    }
-
     hours.forEach(h=>{
       const label = (h%12===0?12:h%12)+':00 '+(h<12?'AM':'PM');
       const disabled = isUnavailable(h);
-      const div = document.createElement('button');
-      div.type='button';
-      div.className='time-slot'+(disabled?' unavailable':'');
-      div.textContent = label;
+      const el = document.createElement('button');
+      el.type='button';
+      el.className='time-slot'+(disabled?' unavailable':'');
+      el.textContent = label;
       if(!disabled){
-        div.addEventListener('click', ()=>{
+        el.addEventListener('click', ()=>{
           timeRow.querySelectorAll('.time-slot').forEach(t=>t.classList.remove('selected'));
-          div.classList.add('selected');
+          el.classList.add('selected');
           selectedTime = fmt(h);
-          saveBookingBtn.disabled = false;
+          confirmBtn.disabled = false;
+          saveBookingBtn.disabled = true;
+          reviewBox.style.display='none'; reviewBox.textContent='';
         });
       }
-      timeRow.appendChild(div);
+      timeRow.appendChild(el);
     });
   }
 
-  function dayHasAnyBooking(date){
-    // booked OR buffer makes day look "dim"? We'll mark booked days only
-    return bookings.some(b => sameDay(new Date(b.startISO), date));
-  }
   function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
 
-  // Save booking with buffers enforced
-  saveBookingBtn.addEventListener('click', ()=>{
-    if(!selectedDate || !selectedTime) return;
-    const hours = parseFloat(hoursInput.value||'1');
-    const start = new Date(selectedDate);
-    const [HH,MM]=selectedTime.split(':'); start.setHours(parseInt(HH),parseInt(MM),0,0);
-    const end = new Date(start); end.setMinutes(end.getMinutes()+hours*60);
-
-    // final conflict check with 1h buffer before + after both sides
-    const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
-    const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
-
-    const conflict = bookings.some(b=>{
-      const bs = new Date(b.startISO), be = new Date(b.endISO);
-      const bsProt = new Date(bs); bsProt.setMinutes(bsProt.getMinutes()-60);
-      const beProt = new Date(be); beProt.setMinutes(beProt.getMinutes()+60);
-      return protectStart < beProt && protectEnd > bsProt;
-    });
-    if(conflict){ alert('That time conflicts with another booking (including travel buffer). Try a different time.'); return; }
-
-    bookings.push({service:svcSelect.value,startISO:start.toISOString(),endISO:end.toISOString()});
-    localStorage.setItem('mimi_bookings', JSON.stringify(bookings));
-    alert('Added to calendar! This time is now blocked out with a travel buffer before and after.');
-    // reset picks
-    selectedTime = null; saveBookingBtn.disabled = true;
-    renderCalendar(); renderTimes();
+  // ===== Confirm step =====
+  confirmBtn.addEventListener('click', ()=>{
+    if(!selectedDate){ alert('Please choose a date.'); return; }
+    if(!selectedFullDay && !selectedTime){ alert('Please choose a start time.'); return; }
+    // Build preview
+    const svc = svcSelect.value;
+    const hrs = parseFloat(hoursInput.value||'1');
+    let start, end;
+    if(selectedFullDay){
+      start = new Date(selectedDate); start.setHours(18,0,0,0);
+      end = new Date(selectedDate); end.setDate(end.getDate()+1); end.setHours(10,0,0,0);
+    } else {
+      start = new Date(selectedDate);
+      const [HH,MM]=selectedTime.split(':'); start.setHours(parseInt(HH),parseInt(MM),0,0);
+      end = new Date(start); end.setMinutes(end.getMinutes()+hrs*60);
+    }
+    reviewBox.style.display='block';
+    reviewBox.innerHTML = `
+      <strong>Review your request</strong><br>
+      Service: <em>${svc}</em><br>
+      When: ${start.toLocaleString()} → ${end.toLocaleString()} ${selectedFullDay?'(full day)':''}<br>
+      Name: ${custName.value||'—'} • Email: ${custEmail.value||'—'} • Phone: ${custPhone.value||'—'}
+    `;
+    saveBookingBtn.disabled = false;
   });
 
-  clearSelectionBtn.addEventListener('click', ()=>{
-    selectedDate = null; selectedTime = null; saveBookingBtn.disabled = true;
+  // ===== Save booking (Netlify + local) =====
+  document.getElementById('saveBooking').addEventListener('click', ()=>{
+    if(!selectedDate){ alert('Pick a date first.'); return; }
+    if(!selectedFullDay && !selectedTime){ alert('Pick a start time.'); return; }
+
+    const service = svcSelect.value;
+    const hours = parseFloat(hoursInput.value||'1');
+
+    let start, end, fullDay = selectedFullDay;
+
+    if(fullDay){
+      start = new Date(selectedDate); start.setHours(18,0,0,0);
+      end = new Date(selectedDate); end.setDate(end.getDate()+1); end.setHours(10,0,0,0);
+    }else{
+      start = new Date(selectedDate);
+      const [HH,MM]=selectedTime.split(':'); start.setHours(parseInt(HH),parseInt(MM),0,0);
+      end = new Date(start); end.setMinutes(end.getMinutes()+hours*60);
+
+      // final conflict check with buffers
+      const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
+      const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
+      const conflict = bookings.some(b=>{
+        const bs = new Date(b.startISO), be = new Date(b.endISO);
+        if(b.fullDay){
+          if(sameDay(start, bs) || sameDay(start, be) || (start>bs && start<be)) return true;
+        }
+        const bsProt = new Date(bs); bsProt.setMinutes(bsProt.getMinutes()-60);
+        const beProt = new Date(be); beProt.setMinutes(beProt.getMinutes()+60);
+        return protectStart < beProt && protectEnd > bsProt;
+      });
+      if(conflict){ alert('That time conflicts with another booking (including travel buffer). Try a different time.'); return; }
+    }
+
+    const booking = {
+      id: 'b'+Date.now(),
+      service, startISO:start.toISOString(), endISO:end.toISOString(),
+      fullDay,
+      name: (custName.value||''),
+      email: (custEmail.value||''),
+      phone: (custPhone.value||''),
+      status: 'pending'
+    };
+    bookings.push(booking);
+    localStorage.setItem('mimi_bookings', JSON.stringify(bookings));
+    renderCalendar(); renderTimes();
+
+    // Send to Netlify Forms
+    submitNetlifyBooking(booking).catch(console.error);
+
+    // Optional mailto notification to Mimi (still handy)
+    if(document.getElementById('emailMimi').checked){
+      const mimi = 'mnnehmi5420@gmail.com';
+      const subj = encodeURIComponent(`New booking request: ${booking.service}`);
+      const body = encodeURIComponent(
+`Service: ${booking.service}
+When: ${new Date(booking.startISO).toLocaleString()} → ${new Date(booking.endISO).toLocaleString()}
+Name: ${booking.name}
+Email: ${booking.email}
+Phone: ${booking.phone}
+
+(You can reply to this email to approve/deny or contact the customer.)`
+      );
+      window.open(`mailto:${mimi}?subject=${subj}&body=${body}`,'_blank');
+    }
+
+    alert('Request sent! We’ll confirm availability by email.');
+    closeModal();
+  });
+
+  document.getElementById('clearSelection').addEventListener('click', ()=>{
+    selectedDate = null; selectedTime = null; 
+    saveBookingBtn.disabled = true; confirmBtn.disabled = true;
+    reviewBox.style.display='none'; reviewBox.textContent='';
     selectedDayLabel.textContent = 'None';
     renderCalendar(); renderTimes();
   });
 
-  // Init month view in modal once opened
-  // (done in openModal)
-
+  // Submit helper for Netlify Forms
+  function submitNetlifyBooking(booking){
+    const data = {
+      'form-name': 'booking',
+      service: booking.service,
+      start: new Date(booking.startISO).toLocaleString(),
+      end: new Date(booking.endISO).toLocaleString(),
+      fullDay: booking.fullDay ? 'yes' : 'no',
+      name: booking.name || '',
+      email: booking.email || '',
+      phone: booking.phone || '',
+      status: booking.status || 'pending',
+      'bot-field': ''
+    };
+    return fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    });
+  }
 </script>
 </body>
 </html>
