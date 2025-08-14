@@ -124,20 +124,20 @@ ul.bullets{margin:.75rem 0 0;padding-left:1.1rem;color:var(--muted)}ul.bullets l
 footer{background:var(--purple);color:#fff;padding:2rem 1rem;margin-top:2rem}
 footer a{color:#fff} footer a:hover{text-decoration:underline}
 
-/* Admin panels */
-.admin-card{background:#fff;border:1px solid var(--ring);border-radius:14px;padding:14px}
-.status-badge{font-size:.75rem;border-radius:999px;padding:.2rem .5rem}
-.status-pending{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
-.status-approved{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
-.status-denied{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+/* Reviews cards */
+.stars{letter-spacing:.1rem}
+.avg-wrap{display:flex;align-items:center;gap:12px;margin:.5rem 0 1rem}
+.avg-score{font-size:2rem;font-weight:900}
+.count{color:var(--muted)}
+.rev-card{background:#fff;border:1px solid var(--ring);border-radius:14px;padding:14px}
 </style>
 </head>
 
 <body>
-  <!-- Top bar -->
+  <!-- Top bar (removed “Insured”) -->
   <div class="topbar">
     <div class="container">
-      <p>Friendly • Insured • Free meet &amp; greet</p>
+      <p>Friendly • Free meet &amp; greet</p>
       <a class="link-underline" href="tel:+18104497159">Call/Text: (810) 449-7159</a>
     </div>
   </div>
@@ -216,18 +216,24 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <!-- Pricing -->
+  <!-- Pricing (updated weekend/holiday overnight) -->
   <section id="pricing" class="section pricing">
     <div class="container">
       <h2 class="h2">Pricing</h2>
-      <p class="muted">Simple, transparent rates. Holiday &amp; weekend adjustments shown below.</p>
+      <p class="muted">Simple, transparent rates.</p>
 
       <div class="grid-cards">
         <article class="card"><h3>Potty Break</h3><p class="sub">15 minutes</p><p class="price">$15</p><ul class="bullets"><li>Quick relief &amp; water</li><li>Photo update</li></ul></article>
         <article class="card featured"><p class="badge">Most booked</p><h3>Walk / Drop-in</h3><p class="sub">30 minutes</p><p class="price">$20</p><ul class="bullets"><li>Feeding/meds on request</li><li>Notes &amp; pics</li></ul></article>
         <article class="card"><h3>Walk / Drop-in</h3><p class="sub">60 minutes</p><p class="price">$30</p><ul class="bullets"><li>Enrichment &amp; playtime</li><li>Great for high-energy pets</li></ul></article>
         <article class="card"><h3>Cats &amp; Small Animals</h3><p class="sub">30 minutes</p><p class="price">$20</p><ul class="bullets"><li>Litter/habitat refresh</li><li>Gentle company</li></ul></article>
-        <article class="card"><h3>Overnight Sitting</h3><p class="sub">In-home • 10–12 hrs</p><p class="price">$40</p><p class="tiny">Fri–Sun $85 • Holidays $95</p><ul class="bullets"><li>Evening &amp; morning walk</li><li>Regular updates</li></ul></article>
+        <article class="card">
+          <h3>Overnight Sitting</h3>
+          <p class="sub">In-home • 10–12 hrs</p>
+          <p class="price">$40</p>
+          <p class="tiny">Fri–Sun $55 • Holidays $75</p>
+          <ul class="bullets"><li>Evening &amp; morning walk</li><li>Regular updates</li></ul>
+        </article>
         <article class="card"><h3>Adventure Outing</h3><p class="sub">3 hours</p><p class="price">from $60</p><ul class="bullets"><li>Park + enrichment games</li><li>Post-adventure recap</li></ul></article>
       </div>
     </div>
@@ -269,46 +275,37 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <!-- Reviews (real, code-gated) -->
+  <!-- Reviews (Google-style look) -->
   <section id="reviews" class="section">
     <div class="container">
       <h2 class="h2">Reviews</h2>
-      <p class="muted">Only customers with a valid Review Code (given after booking) can post. Reviews appear after Mimi approves them.</p>
-
-      <div style="display:grid;gap:14px;grid-template-columns:1fr; margin-bottom:1rem">
-        <form id="reviewForm" class="form">
-          <div class="field"><span>Review Code</span><input id="revCode" placeholder="e.g., MC-8F3K2Q" required></div>
-          <div class="field"><span>Your Name</span><input id="revName" placeholder="First name, last initial" required></div>
-          <div class="field"><span>Rating</span>
-            <select id="revRating">
-              <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
-            </select>
-          </div>
-          <div class="field"><span>Your Review</span><textarea id="revText" rows="4" required placeholder="How did your pet enjoy it?"></textarea></div>
-          <div class="actions">
-            <button class="btn btn-primary" type="submit">Submit Review</button>
-          </div>
-          <p class="note">We’ll verify your code and post the review once approved.</p>
-        </form>
-
-        <!-- Mimi's review moderation -->
-        <div class="admin-card">
-          <h3 style="margin-bottom:.3rem">Manage Reviews (Mimi only)</h3>
-          <div id="reviewsAdmin"></div>
+      <div class="avg-wrap">
+        <div class="avg-score" id="avgScore">5.0</div>
+        <div>
+          <div class="stars" id="avgStars">★★★★★</div>
+          <div class="count" id="revCount">0 reviews</div>
         </div>
       </div>
 
-      <h3 style="margin:.6rem 0">What pet parents are saying</h3>
+      <form id="reviewForm" class="form" style="margin-bottom:1rem">
+        <div class="field"><span>Your Name</span><input id="revName" placeholder="First name, last initial" required></div>
+        <div class="field"><span>Rating</span>
+          <select id="revRating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+        </div>
+        <div class="field"><span>Your Review</span><textarea id="revText" rows="4" required placeholder="Tell us about your experience"></textarea></div>
+        <div class="actions"><button class="btn btn-primary" type="submit">Post Review</button></div>
+        <p class="note">Thanks for sharing! Reviews are also recorded in Netlify Forms so we can keep everything tidy.</p>
+      </form>
+
       <div id="reviewsList" class="grid-cards" style="grid-template-columns:1fr"></div>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ (removed insured Q) -->
   <section id="faq" class="section">
     <div class="container">
       <h2 class="h2">FAQ</h2>
       <div class="grid-cards" style="grid-template-columns:1fr; gap:14px">
-        <details class="faq"><summary>Are you insured and background checked?</summary><p>Yes—your pet and home are protected. Documentation available upon request.</p></details>
         <details class="faq"><summary>How do meet &amp; greets work?</summary><p>We’ll visit your home to learn routines, meet your pets, and confirm services. It’s free.</p></details>
         <details class="faq"><summary>Do you administer medications?</summary><p>Yes—pills, drops, and some injections with prior instructions.</p></details>
         <details class="faq"><summary>What’s your service area?</summary><p>Genesee, Lapeer, and Saginaw counties — and I can travel farther after we discuss pricing.</p></details>
@@ -442,13 +439,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 
             <div class="review" id="reviewBox" style="display:none"></div>
 
-            <div class="inline" style="margin-top:.5rem">
-              <label style="display:flex;align-items:center;gap:.45rem">
-                <input type="checkbox" id="emailMimi" checked>
-                <span class="note">Email a notification to <strong>abertt24@gmail.com</strong></span>
-              </label>
-            </div>
-
             <p class="note">Hour-based services only block the selected hours. A 1-hour travel buffer is added before and after. Full-day (overnight) can block the entire day.</p>
 
             <div class="actions">
@@ -477,26 +467,15 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   <input type="hidden" name="email" />
   <input type="hidden" name="phone" />
   <input type="hidden" name="status" />
-  <input type="hidden" name="reviewCode" />
-</form>
-
-<form name="booking-status" data-netlify="true" hidden>
-  <input type="hidden" name="form-name" value="booking-status" />
-  <input type="hidden" name="id" />
-  <input type="hidden" name="status" />
-  <input type="hidden" name="service" />
-  <input type="hidden" name="start" />
-  <input type="hidden" name="end" />
-  <input type="hidden" name="customer" />
 </form>
 
 <form name="review" data-netlify="true" netlify-honeypot="bot-field" hidden>
   <input type="text" name="bot-field" />
   <input type="hidden" name="form-name" value="review" />
-  <input type="hidden" name="code" />
   <input type="hidden" name="name" />
   <input type="hidden" name="rating" />
   <input type="hidden" name="text" />
+  <input type="hidden" name="date" />
 </form>
 
 <script>
@@ -538,12 +517,11 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   }
   galPrev.addEventListener('click', ()=>{ galIndex--; updateGallery(); });
   galNext.addEventListener('click', ()=>{ galIndex++; updateGallery(); });
-  // make each slide 33.333% width
   [...track.children].forEach(el=> el.style.width = (100/visible)+'%');
   updateGallery();
 
   /* ====== Booking / Calendar Data ====== */
-  // booking: {id, service, startISO, endISO, fullDay, name, email, phone, status, reviewCode}
+  // booking: {id, service, startISO, endISO, fullDay, name, email, phone, status}
   const bookings = JSON.parse(localStorage.getItem('mimi_bookings') || '[]');
 
   const serviceCards = document.querySelectorAll('.service-card');
@@ -565,7 +543,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   const custName = document.getElementById('custName');
   const custEmail = document.getElementById('custEmail');
   const custPhone = document.getElementById('custPhone');
-  const emailMimi = document.getElementById('emailMimi');
 
   let viewYear, viewMonth; // 0-11
   let selectedDate = null; // Date
@@ -667,7 +644,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 
   function renderTimes(){
     timeRow.innerHTML = '';
-    // Full-day: no time picking
     if(selectedFullDay){
       timeRow.insertAdjacentHTML('beforeend','<div class="note" style="grid-column:1/-1">This service blocks the day (overnight). Pick a date, click “Review & Confirm”, then “Send Request”.</div>');
       return;
@@ -677,7 +653,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       return;
     }
 
-    // Hour slots 7:00–20:00
     const hours = []; for(let h=7; h<=20; h++) hours.push(h);
     const fmt = (h)=> (h<10? '0'+h : ''+h)+':00';
 
@@ -693,7 +668,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
           if(sameDay(start, bs) || sameDay(start, be) || (start>bs && start<be)) return true;
           return false;
         }
-        // hourly: enforce 1h buffer both sides
         const protectStart = new Date(start); protectStart.setMinutes(protectStart.getMinutes()-60);
         const protectEnd = new Date(end); protectEnd.setMinutes(protectEnd.getMinutes()+60);
         const bsProt = new Date(bs); bsProt.setMinutes(bsProt.getMinutes()-60);
@@ -750,14 +724,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     saveBookingBtn.disabled = false;
   });
 
-  // Helper: random review code
-  function makeReviewCode(){
-    const s='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let out='MC-';
-    for(let i=0;i<6;i++) out += s[Math.floor(Math.random()*s.length)];
-    return out;
-  }
-
   // ===== Save booking (Netlify + local) =====
   document.getElementById('saveBooking').addEventListener('click', ()=>{
     if(!selectedDate){ alert('Pick a date first.'); return; }
@@ -791,7 +757,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       if(conflict){ alert('That time conflicts with another booking (including travel buffer). Try a different time.'); return; }
     }
 
-    const reviewCode = makeReviewCode();
     const booking = {
       id: 'b'+Date.now(),
       service, startISO:start.toISOString(), endISO:end.toISOString(),
@@ -799,8 +764,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       name: (custName.value||''),
       email: (custEmail.value||''),
       phone: (custPhone.value||''),
-      status: 'pending',
-      reviewCode
+      status: 'pending'
     };
     bookings.push(booking);
     localStorage.setItem('mimi_bookings', JSON.stringify(bookings));
@@ -809,22 +773,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     // Send to Netlify Forms (booking)
     submitNetlifyBooking(booking).catch(console.error);
 
-    // Optional mailto notification to Mimi
-    if(document.getElementById('emailMimi').checked){
-      const mimi = 'abertt24@gmail.com';
-      const subj = encodeURIComponent(`New booking request: ${booking.service}`);
-      const body = encodeURIComponent(
-`Service: ${booking.service}
-When: ${new Date(booking.startISO).toLocaleString()} → ${new Date(booking.endISO).toLocaleString()}
-Name: ${booking.name}
-Email: ${booking.email}
-Phone: ${booking.phone}
-Review Code (share with customer): ${reviewCode}`
-      );
-      window.open(`mailto:${mimi}?subject=${subj}&body=${body}`,'_blank');
-    }
-
-    alert('Request sent! Your Review Code is: '+reviewCode+'  (We’ll also email it.)');
+    alert('Request sent! You’ll receive a confirmation by email after we review availability.');
     closeModal();
   });
 
@@ -836,7 +785,7 @@ Review Code (share with customer): ${reviewCode}`
     renderCalendar(); renderTimes();
   });
 
-  // Submit helper for Netlify Forms (booking)
+  // Submit helper for Netlify Forms (booking) — Netlify will email you once you add a Notification to this form in the dashboard.
   function submitNetlifyBooking(booking){
     const data = {
       'form-name': 'booking',
@@ -848,7 +797,6 @@ Review Code (share with customer): ${reviewCode}`
       email: booking.email || '',
       phone: booking.phone || '',
       status: booking.status || 'pending',
-      reviewCode: booking.reviewCode,
       'bot-field': ''
     };
     return fetch('/', {
@@ -858,92 +806,63 @@ Review Code (share with customer): ${reviewCode}`
     });
   }
 
-  /* ===== Reviews (code-gated, with moderation) ===== */
-  const reviews = JSON.parse(localStorage.getItem('mimi_reviews') || '[]'); // {id, name, rating, text, code, status}
+  /* ===== Reviews (Google-style UI, Netlify + local) ===== */
+  const reviews = JSON.parse(localStorage.getItem('mimi_reviews') || '[]'); // {id,name,rating,text,date}
   const reviewsList = document.getElementById('reviewsList');
-  const reviewsAdmin = document.getElementById('reviewsAdmin');
+  const avgScoreEl = document.getElementById('avgScore');
+  const avgStarsEl = document.getElementById('avgStars');
+  const revCountEl = document.getElementById('revCount');
 
-  function renderPublicReviews(){
+  function renderReviews(){
+    // Average + count
+    const ratings = reviews.map(r=>Number(r.rating)).filter(Boolean);
+    const avg = ratings.length ? (ratings.reduce((a,b)=>a+b,0)/ratings.length) : 0;
+    avgScoreEl.textContent = ratings.length ? avg.toFixed(1) : '0.0';
+    avgStarsEl.textContent = '★★★★★'.slice(0, Math.round(avg)) + '☆☆☆☆☆'.slice(Math.round(avg));
+    revCountEl.textContent = `${ratings.length} review${ratings.length===1?'':'s'}`;
+
+    // Cards
     reviewsList.innerHTML = '';
-    const approved = reviews.filter(r=>r.status==='approved');
-    if(approved.length===0){ reviewsList.innerHTML = '<p class="muted">No reviews yet.</p>'; return; }
-    approved.slice().reverse().forEach(r=>{
-      const fig = document.createElement('figure');
-      fig.className = 'card';
-      fig.innerHTML = `<blockquote>“${escapeHtml(r.text)}”</blockquote><figcaption class="tiny">— ${escapeHtml(r.name)} • ${'⭐'.repeat(+r.rating)}</figcaption>`;
-      reviewsList.appendChild(fig);
-    });
-  }
-  function renderAdminReviews(){
-    reviewsAdmin.innerHTML = '';
-    if(reviews.length===0){ reviewsAdmin.innerHTML = '<p class="muted">No reviews submitted yet.</p>'; return; }
     reviews.slice().reverse().forEach(r=>{
-      const wrap = document.createElement('div');
-      const badge = r.status==='approved'?'status-approved':r.status==='denied'?'status-denied':'status-pending';
-      wrap.className='card';
-      wrap.innerHTML = `
-        <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-          <div>
-            <p class="tiny"><span class="status-badge ${badge}">${r.status}</span></p>
-            <p><strong>${escapeHtml(r.name)}</strong> • ${'⭐'.repeat(+r.rating)}</p>
-            <p class="small" style="white-space:pre-wrap">${escapeHtml(r.text)}</p>
-            <p class="tiny muted">Code: ${r.code}</p>
-          </div>
-          <div class="actions" style="min-width:220px;justify-content:flex-end">
-            <button class="btn btn-primary" data-act="approve" data-id="${r.id}">Approve</button>
-            <button class="btn btn-ghost" data-act="deny" data-id="${r.id}">Deny</button>
-          </div>
-        </div>`;
-      reviewsAdmin.appendChild(wrap);
-    });
-
-    reviewsAdmin.querySelectorAll('button[data-act]').forEach(b=>{
-      b.addEventListener('click', ()=>{
-        const id = b.getAttribute('data-id');
-        const act = b.getAttribute('data-act');
-        const item = reviews.find(x=>x.id===id);
-        if(!item) return;
-        item.status = act==='approve' ? 'approved' : 'denied';
-        localStorage.setItem('mimi_reviews', JSON.stringify(reviews));
-        renderAdminReviews(); renderPublicReviews();
-      });
+      const card = document.createElement('div');
+      card.className = 'rev-card';
+      const stars = '★★★★★'.slice(0, r.rating) + '☆☆☆☆☆'.slice(r.rating);
+      card.innerHTML = `
+        <div class="stars" aria-label="${r.rating} out of 5">${stars}</div>
+        <p style="margin:.25rem 0 .35rem"><strong>${escapeHtml(r.name)}</strong> • <span class="muted">${new Date(r.date).toLocaleDateString()}</span></p>
+        <p style="white-space:pre-wrap">${escapeHtml(r.text)}</p>
+      `;
+      reviewsList.appendChild(card);
     });
   }
-  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
-  // Submit review form
-  document.getElementById('reviewForm').addEventListener('submit', (e)=>{
+  document.getElementById('reviewForm').addEventListener('submit',(e)=>{
     e.preventDefault();
-    const code = document.getElementById('revCode').value.trim().toUpperCase();
     const name = document.getElementById('revName').value.trim();
-    const rating = document.getElementById('revRating').value;
+    const rating = Number(document.getElementById('revRating').value);
     const text = document.getElementById('revText').value.trim();
-
-    // Client-side check: must match a booking's reviewCode (from any stored bookings on this device)
-    const hasBooking = bookings.some(b => (b.reviewCode||'').toUpperCase() === code);
-    if(!hasBooking){
-      alert('That review code was not found. Please use the code sent after booking.');
-      return;
-    }
-
-    const review = { id:'r'+Date.now(), code, name, rating, text, status:'pending' };
-    reviews.push(review);
+    if(!name || !rating || !text){ return; }
+    const item = { id:'r'+Date.now(), name, rating, text, date:new Date().toISOString() };
+    reviews.push(item);
     localStorage.setItem('mimi_reviews', JSON.stringify(reviews));
-    renderAdminReviews();
+    renderReviews();
 
-    // Send to Netlify (optional record)
+    // Also send to Netlify Forms
     fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body: new URLSearchParams({ 'form-name':'review', code, name, rating, text }).toString()
+      body: new URLSearchParams({
+        'form-name':'review',
+        name, rating, text,
+        date: new Date(item.date).toLocaleString(),
+        'bot-field':''
+      }).toString()
     }).catch(()=>{});
 
-    (e.target).reset();
-    alert('Thanks! Your review was submitted and will appear after approval.');
+    e.target.reset();
   });
 
-  renderPublicReviews(); renderAdminReviews();
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+  renderReviews();
 
-  // ===== Helper =====
-  function fmtDt(d){ return new Date(d).toLocaleString(); }
 </script>
 </body>
 </html>
