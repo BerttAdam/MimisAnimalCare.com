@@ -67,20 +67,23 @@ ul.bullets{margin:.75rem 0 0;padding-left:1.1rem;color:var(--muted)}ul.bullets l
 .about-text{max-width:800px;margin:0 auto;line-height:1.7;word-wrap:break-word}
 .about-text p{margin-bottom:1rem}
 
+/* ===== Gallery (3-at-a-time slider) ===== */
+.gallery{position:relative;border:1px solid var(--ring);border-radius:16px;overflow:hidden;background:#fff}
+.gallery-track{display:flex;transition:transform .35s ease}
+.gallery img{width:33.3333%;object-fit:cover;aspect-ratio: 4/3}
+.gallery .nav{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.gallery .nav button{pointer-events:auto;border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:.4rem .6rem;margin:0 .4rem}
+
 /* ===== FAQ ===== */
 .faq{border:1px solid var(--ring);border-radius:12px;padding:14px;background:#fff}
 .faq summary{font-weight:700;cursor:pointer}.faq p{color:var(--muted);margin-top:.45rem}
 
-/* ===== Form ===== */
+/* ===== Forms / Inputs ===== */
 .form{background:#fff;border:1px solid var(--ring);border-radius:var(--radius);padding:18px;box-shadow:0 12px 32px rgba(17,24,39,.06)}
 .field{display:flex;flex-direction:column;gap:.4rem}
 .field span{font-size:.9rem;color:#334155}
 .field input,.field select,.field textarea{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:.8rem .9rem;outline:none;font:inherit}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:#c4b5fd;box-shadow:0 0 0 3px #ede9fe}
-
-/* ===== Footer ===== */
-footer{background:var(--purple);color:#fff;padding:2rem 1rem;margin-top:2rem}
-footer a{color:#fff} footer a:hover{text-decoration:underline}
 
 /* ===== Booking Modal / Calendar ===== */
 .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;padding:1rem}
@@ -105,7 +108,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 .legend-swatch{width:12px;height:12px;border-radius:3px;border:1px solid #cbd5e1}
 .swatch-free{background:#fff}.swatch-selected{background:#ede9fe}.swatch-booked{background:#e2e8f0}
 
-/* time picker */
+/* time picker + review */
 .time-box{border:1px solid var(--ring);border-radius:14px;padding:.75rem}
 .time-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:.5rem}
 .time-slot{padding:.5rem .4rem;border:1px solid #e5e7eb;border-radius:10px;cursor:pointer;font-size:.9rem}
@@ -114,12 +117,19 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
 .inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .divider{height:1px;background:#eef2f7;margin:.8rem 0}
 .note{font-size:.82rem;color:#64748b}
-
-/* actions */
 .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
-
-/* Review box */
 .review{border:1px dashed #cbd5e1;border-radius:12px;padding:.6rem .8rem;background:#fafafa;margin-top:.6rem}
+
+/* ===== Footer ===== */
+footer{background:var(--purple);color:#fff;padding:2rem 1rem;margin-top:2rem}
+footer a{color:#fff} footer a:hover{text-decoration:underline}
+
+/* Admin panels */
+.admin-card{background:#fff;border:1px solid var(--ring);border-radius:14px;padding:14px}
+.status-badge{font-size:.75rem;border-radius:999px;padding:.2rem .5rem}
+.status-pending{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
+.status-approved{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.status-denied{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
 </style>
 </head>
 
@@ -144,6 +154,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
         <a href="#services">Services</a>
         <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
@@ -160,6 +171,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
         <a href="#services">Services</a>
         <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
         <a href="#contact" class="btn btn-primary" style="width:100%;margin-top:.4rem">Book Meet &amp; Greet</a>
@@ -236,15 +248,58 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     </div>
   </section>
 
-  <!-- Reviews -->
-  <section id="reviews" class="section alt">
+  <!-- Gallery (3-at-a-time slider) -->
+  <section id="gallery" class="section alt">
     <div class="container">
-      <h2 class="h2">Happy Clients</h2>
-      <div class="grid-cards">
-        <figure class="card"><blockquote>“Mimi is amazing! Daily photos and our anxious pup warmed up immediately.”</blockquote><figcaption class="tiny">— Alex R.</figcaption></figure>
-        <figure class="card"><blockquote>“Reliable, kind, and professional. Our cats were relaxed when we got home.”</blockquote><figcaption class="tiny">— Priya M.</figcaption></figure>
-        <figure class="card"><blockquote>“The walk notes and pics are the best. Five stars.”</blockquote><figcaption class="tiny">— Jordan K.</figcaption></figure>
+      <h2 class="h2">Gallery</h2>
+      <div class="gallery" aria-label="Pet photos">
+        <div id="galleryTrack" class="gallery-track">
+          <img src="Pictures/gallery-1.jpg" alt="Happy dog on walk">
+          <img src="Pictures/gallery-2.jpg" alt="Cat getting chin scratches">
+          <img src="Pictures/gallery-3.jpg" alt="Pup at the park">
+          <img src="Pictures/gallery-4.jpg" alt="Leash training">
+          <img src="Pictures/gallery-5.jpg" alt="Small animal care">
+          <img src="Pictures/gallery-6.jpg" alt="Adventure day fun">
+        </div>
+        <div class="nav">
+          <button id="galPrev" aria-label="Previous photos">‹</button>
+          <button id="galNext" aria-label="Next photos">›</button>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Reviews (real, code-gated) -->
+  <section id="reviews" class="section">
+    <div class="container">
+      <h2 class="h2">Reviews</h2>
+      <p class="muted">Only customers with a valid Review Code (given after booking) can post. Reviews appear after Mimi approves them.</p>
+
+      <div style="display:grid;gap:14px;grid-template-columns:1fr; margin-bottom:1rem">
+        <form id="reviewForm" class="form">
+          <div class="field"><span>Review Code</span><input id="revCode" placeholder="e.g., MC-8F3K2Q" required></div>
+          <div class="field"><span>Your Name</span><input id="revName" placeholder="First name, last initial" required></div>
+          <div class="field"><span>Rating</span>
+            <select id="revRating">
+              <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+            </select>
+          </div>
+          <div class="field"><span>Your Review</span><textarea id="revText" rows="4" required placeholder="How did your pet enjoy it?"></textarea></div>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Submit Review</button>
+          </div>
+          <p class="note">We’ll verify your code and post the review once approved.</p>
+        </form>
+
+        <!-- Mimi's review moderation -->
+        <div class="admin-card">
+          <h3 style="margin-bottom:.3rem">Manage Reviews (Mimi only)</h3>
+          <div id="reviewsAdmin"></div>
+        </div>
+      </div>
+
+      <h3 style="margin:.6rem 0">What pet parents are saying</h3>
+      <div id="reviewsList" class="grid-cards" style="grid-template-columns:1fr"></div>
     </div>
   </section>
 
@@ -268,7 +323,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
         <h2 class="h2" style="color:#fff">Book a Meet &amp; Greet</h2>
         <p class="muted" style="color:#cbd5e1">Tell me about your pets and preferred dates. I’ll reply within a business day.</p>
         <p class="small" style="color:#cbd5e1">Prefer to call? <a class="link-underline" style="color:#fff" href="tel:+18104497159">(810) 449-7159</a></p>
-        <p class="small" style="color:#cbd5e1">Email: <a class="link-underline" style="color:#fff" href="mailto:mnnehmi5420@gmail.com">mnnehmi5420@gmail.com</a></p>
+        <p class="small" style="color:#cbd5e1">Email: <a class="link-underline" style="color:#fff" href="mailto:abertt24@gmail.com">abertt24@gmail.com</a></p>
       </div>
 
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form">
@@ -307,7 +362,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       <div>
         <p><a href="#services">Services</a></p>
         <p><a href="#pricing">Pricing</a></p>
-        <p><a href="#reviews">Reviews</a></p>
+        <p><a href="#gallery">Gallery</a></p>
       </div>
       <div class="small">
         <p>&copy; <span id="year"></span> Mimi’s Animal Care. All rights reserved.</p>
@@ -390,7 +445,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
             <div class="inline" style="margin-top:.5rem">
               <label style="display:flex;align-items:center;gap:.45rem">
                 <input type="checkbox" id="emailMimi" checked>
-                <span class="note">Email a notification to <strong>mnnehmi5420@gmail.com</strong></span>
+                <span class="note">Email a notification to <strong>abertt24@gmail.com</strong></span>
               </label>
             </div>
 
@@ -422,6 +477,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   <input type="hidden" name="email" />
   <input type="hidden" name="phone" />
   <input type="hidden" name="status" />
+  <input type="hidden" name="reviewCode" />
 </form>
 
 <form name="booking-status" data-netlify="true" hidden>
@@ -432,6 +488,15 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   <input type="hidden" name="start" />
   <input type="hidden" name="end" />
   <input type="hidden" name="customer" />
+</form>
+
+<form name="review" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="hidden" name="form-name" value="review" />
+  <input type="hidden" name="code" />
+  <input type="hidden" name="name" />
+  <input type="hidden" name="rating" />
+  <input type="hidden" name="text" />
 </form>
 
 <script>
@@ -457,8 +522,28 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     closeI.classList.add('hidden');
   }));
 
+  // ===== Gallery (3-at-a-time) =====
+  const track = document.getElementById('galleryTrack');
+  const galPrev = document.getElementById('galPrev');
+  const galNext = document.getElementById('galNext');
+  let galIndex = 0;
+  const total = track.children.length;
+  const visible = 3;
+  function updateGallery(){
+    const maxIndex = Math.ceil(total/visible)-1;
+    if(galIndex<0) galIndex = 0;
+    if(galIndex>maxIndex) galIndex = maxIndex;
+    const pct = -(galIndex*100);
+    track.style.transform = `translateX(${pct}%)`;
+  }
+  galPrev.addEventListener('click', ()=>{ galIndex--; updateGallery(); });
+  galNext.addEventListener('click', ()=>{ galIndex++; updateGallery(); });
+  // make each slide 33.333% width
+  [...track.children].forEach(el=> el.style.width = (100/visible)+'%');
+  updateGallery();
+
   /* ====== Booking / Calendar Data ====== */
-  // booking: {id, service, startISO, endISO, fullDay, name, email, phone, status}
+  // booking: {id, service, startISO, endISO, fullDay, name, email, phone, status, reviewCode}
   const bookings = JSON.parse(localStorage.getItem('mimi_bookings') || '[]');
 
   const serviceCards = document.querySelectorAll('.service-card');
@@ -570,8 +655,8 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
         selectedDate = new Date(cell.getAttribute('data-iso')+'T00:00:00');
         selectedTime = null;
         selectedDayLabel.textContent = selectedDate.toDateString();
-        saveBookingBtn.disabled = selectedFullDay ? true : true; // enable after confirm
-        confirmBtn.disabled = selectedFullDay ? false : true; // full-day can confirm immediately
+        saveBookingBtn.disabled = true; // enabled after confirm
+        confirmBtn.disabled = selectedFullDay ? false : true;
         calGrid.querySelectorAll('.cal-cell').forEach(c=>c.classList.remove('selected'));
         cell.classList.add('selected');
         reviewBox.style.display='none'; reviewBox.textContent='';
@@ -644,7 +729,6 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
   confirmBtn.addEventListener('click', ()=>{
     if(!selectedDate){ alert('Please choose a date.'); return; }
     if(!selectedFullDay && !selectedTime){ alert('Please choose a start time.'); return; }
-    // Build preview
     const svc = svcSelect.value;
     const hrs = parseFloat(hoursInput.value||'1');
     let start, end;
@@ -665,6 +749,14 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
     `;
     saveBookingBtn.disabled = false;
   });
+
+  // Helper: random review code
+  function makeReviewCode(){
+    const s='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let out='MC-';
+    for(let i=0;i<6;i++) out += s[Math.floor(Math.random()*s.length)];
+    return out;
+  }
 
   // ===== Save booking (Netlify + local) =====
   document.getElementById('saveBooking').addEventListener('click', ()=>{
@@ -699,6 +791,7 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       if(conflict){ alert('That time conflicts with another booking (including travel buffer). Try a different time.'); return; }
     }
 
+    const reviewCode = makeReviewCode();
     const booking = {
       id: 'b'+Date.now(),
       service, startISO:start.toISOString(), endISO:end.toISOString(),
@@ -706,18 +799,19 @@ footer a{color:#fff} footer a:hover{text-decoration:underline}
       name: (custName.value||''),
       email: (custEmail.value||''),
       phone: (custPhone.value||''),
-      status: 'pending'
+      status: 'pending',
+      reviewCode
     };
     bookings.push(booking);
     localStorage.setItem('mimi_bookings', JSON.stringify(bookings));
     renderCalendar(); renderTimes();
 
-    // Send to Netlify Forms
+    // Send to Netlify Forms (booking)
     submitNetlifyBooking(booking).catch(console.error);
 
-    // Optional mailto notification to Mimi (still handy)
+    // Optional mailto notification to Mimi
     if(document.getElementById('emailMimi').checked){
-      const mimi = 'mnnehmi5420@gmail.com';
+      const mimi = 'abertt24@gmail.com';
       const subj = encodeURIComponent(`New booking request: ${booking.service}`);
       const body = encodeURIComponent(
 `Service: ${booking.service}
@@ -725,13 +819,12 @@ When: ${new Date(booking.startISO).toLocaleString()} → ${new Date(booking.endI
 Name: ${booking.name}
 Email: ${booking.email}
 Phone: ${booking.phone}
-
-(You can reply to this email to approve/deny or contact the customer.)`
+Review Code (share with customer): ${reviewCode}`
       );
       window.open(`mailto:${mimi}?subject=${subj}&body=${body}`,'_blank');
     }
 
-    alert('Request sent! We’ll confirm availability by email.');
+    alert('Request sent! Your Review Code is: '+reviewCode+'  (We’ll also email it.)');
     closeModal();
   });
 
@@ -743,7 +836,7 @@ Phone: ${booking.phone}
     renderCalendar(); renderTimes();
   });
 
-  // Submit helper for Netlify Forms
+  // Submit helper for Netlify Forms (booking)
   function submitNetlifyBooking(booking){
     const data = {
       'form-name': 'booking',
@@ -755,6 +848,7 @@ Phone: ${booking.phone}
       email: booking.email || '',
       phone: booking.phone || '',
       status: booking.status || 'pending',
+      reviewCode: booking.reviewCode,
       'bot-field': ''
     };
     return fetch('/', {
@@ -763,6 +857,93 @@ Phone: ${booking.phone}
       body: new URLSearchParams(data).toString()
     });
   }
+
+  /* ===== Reviews (code-gated, with moderation) ===== */
+  const reviews = JSON.parse(localStorage.getItem('mimi_reviews') || '[]'); // {id, name, rating, text, code, status}
+  const reviewsList = document.getElementById('reviewsList');
+  const reviewsAdmin = document.getElementById('reviewsAdmin');
+
+  function renderPublicReviews(){
+    reviewsList.innerHTML = '';
+    const approved = reviews.filter(r=>r.status==='approved');
+    if(approved.length===0){ reviewsList.innerHTML = '<p class="muted">No reviews yet.</p>'; return; }
+    approved.slice().reverse().forEach(r=>{
+      const fig = document.createElement('figure');
+      fig.className = 'card';
+      fig.innerHTML = `<blockquote>“${escapeHtml(r.text)}”</blockquote><figcaption class="tiny">— ${escapeHtml(r.name)} • ${'⭐'.repeat(+r.rating)}</figcaption>`;
+      reviewsList.appendChild(fig);
+    });
+  }
+  function renderAdminReviews(){
+    reviewsAdmin.innerHTML = '';
+    if(reviews.length===0){ reviewsAdmin.innerHTML = '<p class="muted">No reviews submitted yet.</p>'; return; }
+    reviews.slice().reverse().forEach(r=>{
+      const wrap = document.createElement('div');
+      const badge = r.status==='approved'?'status-approved':r.status==='denied'?'status-denied':'status-pending';
+      wrap.className='card';
+      wrap.innerHTML = `
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+          <div>
+            <p class="tiny"><span class="status-badge ${badge}">${r.status}</span></p>
+            <p><strong>${escapeHtml(r.name)}</strong> • ${'⭐'.repeat(+r.rating)}</p>
+            <p class="small" style="white-space:pre-wrap">${escapeHtml(r.text)}</p>
+            <p class="tiny muted">Code: ${r.code}</p>
+          </div>
+          <div class="actions" style="min-width:220px;justify-content:flex-end">
+            <button class="btn btn-primary" data-act="approve" data-id="${r.id}">Approve</button>
+            <button class="btn btn-ghost" data-act="deny" data-id="${r.id}">Deny</button>
+          </div>
+        </div>`;
+      reviewsAdmin.appendChild(wrap);
+    });
+
+    reviewsAdmin.querySelectorAll('button[data-act]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const id = b.getAttribute('data-id');
+        const act = b.getAttribute('data-act');
+        const item = reviews.find(x=>x.id===id);
+        if(!item) return;
+        item.status = act==='approve' ? 'approved' : 'denied';
+        localStorage.setItem('mimi_reviews', JSON.stringify(reviews));
+        renderAdminReviews(); renderPublicReviews();
+      });
+    });
+  }
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+  // Submit review form
+  document.getElementById('reviewForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const code = document.getElementById('revCode').value.trim().toUpperCase();
+    const name = document.getElementById('revName').value.trim();
+    const rating = document.getElementById('revRating').value;
+    const text = document.getElementById('revText').value.trim();
+
+    // Client-side check: must match a booking's reviewCode (from any stored bookings on this device)
+    const hasBooking = bookings.some(b => (b.reviewCode||'').toUpperCase() === code);
+    if(!hasBooking){
+      alert('That review code was not found. Please use the code sent after booking.');
+      return;
+    }
+
+    const review = { id:'r'+Date.now(), code, name, rating, text, status:'pending' };
+    reviews.push(review);
+    localStorage.setItem('mimi_reviews', JSON.stringify(reviews));
+    renderAdminReviews();
+
+    // Send to Netlify (optional record)
+    fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body: new URLSearchParams({ 'form-name':'review', code, name, rating, text }).toString()
+    }).catch(()=>{});
+
+    (e.target).reset();
+    alert('Thanks! Your review was submitted and will appear after approval.');
+  });
+
+  renderPublicReviews(); renderAdminReviews();
+
+  // ===== Helper =====
+  function fmtDt(d){ return new Date(d).toLocaleString(); }
 </script>
 </body>
 </html>
