@@ -1,0 +1,14 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[redirects]]
+  from = "http://mimisanimalcare.com/*"
+  to = "https://mimisanimalcare.com/:splat"
+  status = 301
+  force = true

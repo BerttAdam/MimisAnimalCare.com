@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mimi’s Admin • Bookings</title>
+<meta name="robots" content="noindex" />
+<style>
+:root{--ink:#0f172a;--muted:#475569;--ring:#e5e7eb;--purple:#7c3aed;--lav:#f5f3ff}
+*{box-sizing:border-box} html,body{margin:0;padding:0;font-family:system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:#fff}
+.wrap{max-width:1100px;margin:0 auto;padding:1rem}
+h1{font-size:clamp(1.4rem,2.2vw,2rem);margin:.5rem 0 1rem}
+.card{border:1px solid var(--ring);border-radius:14px;padding:14px;background:#fff}
+.grid{display:grid;gap:10px}
+.table{width:100%;border-collapse:separate;border-spacing:0}
+th,td{padding:.6rem;border-bottom:1px solid #f1f5f9;vertical-align:top}
+th{font-weight:700;text-align:left}
+.badge{font-size:.75rem;border-radius:999px;padding:.15rem .5rem;border:1px solid}
+.b-pending{background:#fff7ed;border-color:#fed7aa;color:#9a3412}
+.b-approved{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+.b-denied{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.b-cancelled{background:#f1f5f9;border-color:#e2e8f0;color:#475569}
+.controls{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;padding:.55rem .8rem;cursor:pointer;font-weight:700}
+.btn-ghost{border:1px solid #cbd5e1;background:#fff}
+.btn-primary{background:var(--purple);color:#fff}
+.btn-danger{background:#ef4444;color:#fff}
+.note{color:var(--muted);font-size:.9rem}
+.row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+input,textarea,select{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:.6rem .7rem;font:inherit}
+kbd{background:#111827;color:#fff;border-radius:6px;padding:.1rem .35rem;font-size:.85rem}
+hr{border:0;border-top:1px solid #eef2f7;margin:1rem 0}
+footer{color:#94a3b8;font-size:.85rem;margin:1rem 0}
+.hidden{display:none}
+.searchbar{display:flex;gap:.5rem;flex-wrap:wrap;margin:.4rem 0}
+.searchbar input{flex:1}
+.tag{font-size:.8rem;border:1px solid #e5e7eb;border-radius:999px;padding:.1rem .45rem;background:#f8fafc}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Admin • Mimi’s Animal Care</h1>
+
+  <!-- Login -->
+  <div id="loginCard" class="card">
+    <p class="note">Enter your admin key to manage bookings. You set this in Netlify as <strong>ADMIN_KEY</strong>.</p>
+    <div class="row">
+      <input id="adminKey" placeholder="Admin key" autocomplete="off" />
+      <button class="btn btn-primary" id="loginBtn">Unlock</button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div id="content" class="hidden">
+    <div class="row" style="justify-content:space-between">
+      <div class="note">Bookings from Netlify Form: <strong>booking</strong></div>
+      <div class="row">
+        <span id="counts" class="tag">Total 0</span>
+        <button id="refreshBtn" class="btn btn-ghost">Refresh</button>
+      </div>
+    </div>
+
+    <div class="searchbar">
+      <input id="q" placeholder="Search by name, email, phone, service…" />
+      <select id="filterStatus" style="max-width:180px">
+        <option value="">All statuses</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="denied">Denied</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <table class="table" id="bookingsTbl">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Service / When</th>
+            <th>Status</th>
+            <th style="width:340px">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="4" class="note">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr />
+    <details>
+      <summary><strong>Email preview</strong></summary>
+      <div class="grid" style="margin-top:.5rem">
+        <div class="card">
+          <h3>Subject</h3>
+          <p id="emailSubject" class="note"></p>
+          <h3>Body</h3>
+          <pre id="emailBody" style="white-space:pre-wrap"></pre>
+        </div>
+      </div>
+    </details>
+
+    <footer>Shortcuts: <kbd>R</kbd> refresh • <kbd>/</kbd> focus search</footer>
+  </div>
+</div>
+
+<script>
+const api = '/.netlify/functions/admin-api';
+const loginCard = document.getElementById('loginCard');
+const content = document.getElementById('content');
+const adminKeyEl = document.getElementById('adminKey');
+const loginBtn = document.getElementById('loginBtn');
+const refreshBtn = document.getElementById('refreshBtn');
+const tbody = document.getElementById('tbody');
+const counts = document.getElementById('counts');
+const subjEl = document.getElementById('emailSubject');
+const bodyEl = document.getElementById('emailBody');
+const q = document.getElementById('q');
+const filterStatus = document.getElementById('filterStatus');
+
+let ADMIN_KEY = localStorage.getItem('mimi_admin_key') || '';
+let items = [];
+
+if(ADMIN_KEY){ adminKeyEl.value = ADMIN_KEY; unlock(); }
+
+loginBtn.addEventListener('click', () => {
+  ADMIN_KEY = adminKeyEl.value.trim();
+  if(!ADMIN_KEY){ alert('Enter your admin key.'); return; }
+  localStorage.setItem('mimi_admin_key', ADMIN_KEY);
+  unlock();
+});
+
+refreshBtn.addEventListener('click', load);
+document.addEventListener('keydown', (e)=>{ 
+  if(e.key.toLowerCase()==='r') load();
+  if(e.key==='/'){ e.preventDefault(); q.focus(); }
+});
+q.addEventListener('input', ()=> render());
+filterStatus.addEventListener('change', ()=> render());
+
+function unlock(){
+  fetch(api+'?action=poll', { headers: { 'x-admin-key': ADMIN_KEY }})
+   .then(r=> r.ok ? (loginCard.classList.add('hidden'), content.classList.remove('hidden'), load()) : Promise.reject())
+   .catch(()=> alert('Invalid admin key.'));
+}
+
+function load(){
+  tbody.innerHTML = '<tr><td colspan="4" class="note">Loading…</td></tr>';
+  fetch(api+'?action=list', { headers: { 'x-admin-key': ADMIN_KEY }})
+    .then(r=> r.json())
+    .then(data=>{
+      items = data.items||[];
+      counts.textContent = `Total ${data.total} • Pending ${data.pending} • Approved ${data.approved} • Denied ${data.denied}`;
+      render();
+    })
+    .catch(err=>{
+      tbody.innerHTML = `<tr><td colspan="4" class="note">Error: ${err?.message||'failed to load'}</td></tr>`;
+    });
+}
+
+function matchesFilter(it){
+  const term = q.value.trim().toLowerCase();
+  const status = filterStatus.value;
+  const hay = `${it.name||''} ${it.email||''} ${it.phone||''} ${it.service||''}`.toLowerCase();
+  const okTerm = !term || hay.includes(term);
+  const s = (it.status||'pending').toLowerCase();
+  const okStatus = !status || s===status;
+  return okTerm && okStatus;
+}
+
+function render(){
+  const view = items.filter(matchesFilter);
+  tbody.innerHTML = '';
+  if(view.length===0){ tbody.innerHTML = '<tr><td colspan="4" class="note">No submissions found.</td></tr>'; return; }
+  view.forEach(it=>{
+    const tr = document.createElement('tr');
+
+    const who = document.createElement('td');
+    who.innerHTML = `<strong>${esc(it.name||'Unknown')}</strong><br><span class="note">${esc(it.email||'—')} • ${esc(it.phone||'')}</span>`;
+    tr.appendChild(who);
+
+    const what = document.createElement('td');
+    what.innerHTML = `<div><strong>${esc(it.service||'')}</strong></div>
+      <div class="note">${esc(it.start||'')} → ${esc(it.end||'')}</div>
+      <div class="note">${it.fullDay==='yes'?'Full day':''}</div>`;
+    tr.appendChild(what);
+
+    const status = document.createElement('td');
+    const s = (it.status||'pending').toLowerCase();
+    const cls = s==='approved'?'b-approved':s==='denied'?'b-denied':s==='cancelled'?'b-cancelled':'b-pending';
+    status.innerHTML = `<span class="badge ${cls}">${s}</span>`;
+    tr.appendChild(status);
+
+    const act = document.createElement('td');
+    const msgId = 'msg_'+it.id;
+    act.innerHTML = `
+      <textarea id="${msgId}" rows="2" placeholder="Optional message to customer"></textarea>
+      <div class="controls" style="margin-top:.4rem">
+        <button class="btn btn-primary" data-act="approve">Approve</button>
+        <button class="btn btn-ghost" data-act="deny">Deny</button>
+        <button class="btn btn-ghost" data-act="email">Email Only</button>
+        <button class="btn btn-danger" data-act="cancel">Cancel & Delete</button>
+      </div>
+      <p class="note">“Cancel & Delete” records status as <em>cancelled</em>, emails the customer, then removes the booking from the list.</p>`;
+    tr.appendChild(act);
+
+    tr.querySelectorAll('button[data-act]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const action = b.getAttribute('data-act');
+        const msg = document.getElementById(msgId).value.trim();
+        previewEmail(action, it, msg);
+        if(action==='cancel' && !confirm('Mark as cancelled and delete this booking from Netlify?')) return;
+        handle(action, it, msg);
+      });
+    });
+
+    tbody.appendChild(tr);
+  });
+}
+
+function handle(action, item, message){
+  const payload = { action, id:item.id, customerEmail:item.email, customerName:item.name,
+    service:item.service, start:item.start, end:item.end, message };
+  fetch(api, {
+    method:'POST',
+    headers:{ 'Content-Type':'application/json', 'x-admin-key': ADMIN_KEY },
+    body: JSON.stringify(payload)
+  })
+  .then(r=> r.json())
+  .then(res=>{
+    if(!res.ok){ alert('Error: '+(res.error||'unknown')); return; }
+    if(action==='approve' || action==='deny' || action==='cancel'){
+      load();
+      alert(`${action==='approve'?'Approved':action==='deny'?'Denied':'Cancelled & deleted'} and emailed.`);
+    } else {
+      alert('Email sent.');
+    }
+  })
+  .catch(err=> alert('Request failed: '+err.message));
+}
+
+function previewEmail(action, it, msg){
+  const name = it.name || 'there';
+  let statusLine = 'Update';
+  if(action==='approve') statusLine = 'Approved ✅';
+  if(action==='deny') statusLine = 'Declined';
+  if(action==='cancel') statusLine = 'Cancelled';
+  subjEl.textContent = `Mimi’s Animal Care — ${statusLine}: ${it.service}`;
+  const b = [];
+  b.push(`Hi ${name},`);
+  if(action==='approve'){
+    b.push(`Good news — your request is approved!`);
+  } else if(action==='deny'){
+    b.push(`Thanks for your request. Unfortunately I’m not available for that time.`);
+  } else if(action==='cancel'){
+    b.push(`Your booking has been cancelled per request.`);
+  } else {
+    b.push(`Here’s an update on your request:`);
+  }
+  b.push('');
+  b.push(`Service: ${it.service}`);
+  b.push(`When: ${it.start} → ${it.end}${it.fullDay==='yes'?' (full day)':''}`);
+  if(msg) { b.push(''); b.push(`Note from Mimi: ${msg}`); }
+  b.push('');
+  b.push(`Reply to this email if you have any questions.`);
+  b.push(`— Mimi`);
+  bodyEl.textContent = b.join('\n');
+}
+
+function esc(s){ return (s||'').toString().replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[m])); }
+</script>
+</body>
+</html>
